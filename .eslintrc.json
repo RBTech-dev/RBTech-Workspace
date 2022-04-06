@@ -58,27 +58,6 @@
                 ]
               },
               {
-                "sourceTag": "scope:frasario",
-                "onlyDependOnLibsWithTags": [
-                  "scope:frasario",
-                  "scope:auth",
-                  "scope:shared"
-                ]
-              },
-              {
-                "sourceTag": "scope:auth",
-                "onlyDependOnLibsWithTags": [
-                  "scope:auth",
-                  "scope:shared"
-                ]
-              },
-              {
-                "sourceTag": "scope:shared",
-                "onlyDependOnLibsWithTags": [
-                  "scope:shared"
-                ]
-              },
-              {
                 "sourceTag": "platform:angular",
                 "onlyDependOnLibsWithTags": [
                   "platform:angular",
