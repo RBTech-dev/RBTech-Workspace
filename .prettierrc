@@ -1,0 +1,24 @@
+{
+  "singleQuote": true,
+  "printWidth": 80,
+  "useTabs": false,
+  "tabWidth": 2,
+  "semi": true,
+  "bracketSpacing": true,
+  "htmlWhitespaceSensitivity": "ignore",
+  "xmlWhitespaceSensitivity": "ignore",
+  "xmlSelfClosingSpace": true,
+  "overrides": [
+    {
+      "files": [
+        "**/*.css",
+        "**/*.scss",
+        "**/*.sass",
+        "**/*.html"
+      ],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
+}
