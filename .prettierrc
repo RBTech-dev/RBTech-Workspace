@@ -6,8 +6,6 @@
   "semi": true,
   "bracketSpacing": true,
   "htmlWhitespaceSensitivity": "ignore",
-  "xmlWhitespaceSensitivity": "ignore",
-  "xmlSelfClosingSpace": true,
   "overrides": [
     {
       "files": [
