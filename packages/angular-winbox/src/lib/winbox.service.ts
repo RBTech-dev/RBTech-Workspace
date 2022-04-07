@@ -5,8 +5,8 @@ import {
   Type,
 } from '@angular/core';
 import 'winbox';
+import WinBox from 'winbox';
 
-declare const WinBox: WinBox.WinBoxConstructor;
 export type WinBoxOptions = WinBox.Params;
 
 export interface WinBoxContainer<ComponentInstance> {
@@ -14,10 +14,15 @@ export interface WinBoxContainer<ComponentInstance> {
   instance: ComponentInstance;
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class WinboxService {
-  private winBoxStack: WinBox[] = [];
   public isThereAWinBox = false;
+
+  get numberOfWinboxes(): number {
+    return this.winBoxStack.length;
+  }
+
+  private winBoxStack: WinBox[] = [];
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,

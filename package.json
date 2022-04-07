@@ -43,6 +43,7 @@
     "@nrwl/angular": "13.9.7",
     "rxjs": "~7.4.0",
     "tslib": "^2.0.0",
+    "winbox": "^0.2.1",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -68,6 +69,8 @@
     "@types/winbox": "^0.2.1",
     "@typescript-eslint/eslint-plugin": "~5.10.0",
     "@typescript-eslint/parser": "~5.10.0",
+    "babel-jest": "^27.5.1",
+    "babel-preset-env": "^1.7.0",
     "commitizen": "^4.2.4",
     "cypress": "^9.1.0",
     "cz-conventional-changelog": "^3.3.0",
