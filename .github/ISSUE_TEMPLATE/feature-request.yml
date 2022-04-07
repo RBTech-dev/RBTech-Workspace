@@ -5,15 +5,21 @@ body:
   - type: markdown
     attributes:
       value: |
-        ❤️ ngrx? Please consider supporting our collective: 👉  [donate](https://opencollective.com/ngrx/donate)
         Please search GitHub for a similar issue or PR before submitting a new issue.
-        If you need real-time help, join us on [Discord](https://discord.com/invite/ngrx).
+
+  - type: dropdown
+    id: Library
+    attributes:
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - angular-winbox
 
   - type: textarea
     id: information
     attributes:
       label: Information
-      description: Tell us what you want to be added to NgRx
+      description: Tell us what you want to be added to the selected library
     validations:
       required: true
 

@@ -6,9 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        ❤️ ngrx? Please consider supporting our collective: 👉  [donate](https://opencollective.com/ngrx/donate)
         Please search GitHub for a similar issue or PR before submitting a new issue.
-        If you need real-time help, join us on [Discord](https://discord.com/invite/ngrx).
 
   - type: textarea
     id: information
