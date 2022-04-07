@@ -1,5 +1,26 @@
 {
   "extends": [
     "config:base"
-  ]
+  ],
+  "baseBranches": [
+    "master"
+  ],
+  "labels": [
+    "chore(deps)"
+  ],
+  "packageRules": [
+    {
+      "matchPackagePatterns": [
+        "eslint"
+      ],
+      "labels": [
+        "chore(deps-linting)"
+      ]
+    },
+    {
+      "matchDepTypes": ["optionalDependencies"],
+      "addLabels": ["chore(optional-deps)"]
+    }
+  ],
+  "automerge": true
 }
