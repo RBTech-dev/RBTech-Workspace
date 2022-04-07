@@ -1,0 +1,8 @@
+# Add 'Project: angular-wibox' label to any angular-winbox file changes
+'Project: angular-winbox':
+  - packages/angular-winbox/*
+  - packages/angular-winbox/**/*
+
+# Add 'dependencies' label to any change to npm or yarn related stuff
+dependencies:
+  - package.json
