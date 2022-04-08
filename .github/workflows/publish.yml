@@ -20,16 +20,16 @@ jobs:
 
       # Make sure we have all branches
       - name: Fetch other branches
-      if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
-      run: git fetch --no-tags --prune --depth=5 origin master
+        if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
+        run: git fetch --no-tags --prune --depth=5 origin master
 
-       - name: Cache node modules
-       uses: actions/cache@v3
-       with:
-         path: ~/.npm
-         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-         restore-keys: |
-           ${{ runner.os }}-node-
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       # Setup node
       - name: Use Node.js ${{ matrix.node-version }}
