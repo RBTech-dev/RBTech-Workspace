@@ -17,6 +17,44 @@ jobs:
       - name: Checkout Code
         if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
         uses: actions/checkout@v2
+
+      # Make sure we have all branches
+      - name: Fetch other branches
+      if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
+      run: git fetch --no-tags --prune --depth=5 origin master
+
+       - name: Cache node modules
+       uses: actions/cache@v3
+       with:
+         path: ~/.npm
+         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+         restore-keys: |
+           ${{ runner.os }}-node-
+
+      # Setup node
+      - name: Use Node.js ${{ matrix.node-version }}
+        if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # Run Install
+      - name: Install environment
+        if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
+        run: npm ci
+
+      - name: Run lint
+        run: ./.github/scripts/run-linting.sh True
+
+      - name: Tests coverage
+        run: ./.github/scripts/run-testing.sh True
+
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACTION_AUTH_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_AUTH_TOKEN }}
+
       - name: Deploy
         if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
         env:
@@ -27,6 +65,7 @@ jobs:
       - name: Build Docs
         if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
         run: npm run docs
+
       - name: Commit files
         if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
         run: |
@@ -34,6 +73,7 @@ jobs:
           git config --local user.name "GitHub Action"
           git add .
           git commit -m "Release [skip-ci]" -a || true
+
       - name: Push changes
         if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
         uses: ad-m/github-push-action@master
