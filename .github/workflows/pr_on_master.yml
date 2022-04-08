@@ -34,7 +34,7 @@ jobs:
       run: git fetch --no-tags --prune --depth=5 origin master
 
     - name: Install environment
-      run: npm ci --include=dev
+      run: npm install
 
     - name: Run lint
       run: npm run affected:lint -- --base="origin/master"
