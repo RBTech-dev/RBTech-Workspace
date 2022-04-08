@@ -1,0 +1,44 @@
+# angular-winbox
+
+A wrapper component for [WinBox.js](https://nextapps-de.github.io/winbox/) with the ability to mount Angular components.
+
+## Installation
+```bash
+//
+```
+## Usage
+The service return an instance of a Winbox, which wraps Winbox.js and the component's instance.
+```javascript
+const winboxWrapper = this.winBoxService.openWinBox(
+                {
+                  title: "Winbox",
+                  height: '90%',
+                  width: '40%',
+                  x: 'center',
+                  y: 'center',
+                  onclose: () => {
+                    this.cdRef.detectChanges();
+                    return false;
+                  },
+                },
+                SampleComponent
+              );
+// It is possible to access to component's properties.
+winboxWrapper.instance.value = 5;
+winboxWrapper.winBox.close();
+```
+## Methods and Properties
+```javascript
+constructor(winBoxService : WinboxService) {}
+
+// Open the last created WinBox.
+this.winBoxService.showLastWinbox();
+
+// Close all the created winBox.
+this.winBoxService.closeAllWinBoxes();
+
+// Boolean that indicates if there is at least one created Winbox.
+const isThereAWinBox = this.wiBoxService.isThereAWinBox;
+```
+
+

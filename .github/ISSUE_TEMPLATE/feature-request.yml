@@ -1,0 +1,38 @@
+name: Feature Request
+description: Submit a Request For Consideration
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please search GitHub for a similar issue or PR before submitting a new issue.
+
+  - type: dropdown
+    id: Library
+    attributes:
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - angular-winbox
+
+  - type: textarea
+    id: information
+    attributes:
+      label: Information
+      description: Tell us what you want to be added to the selected library
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Describe any alternatives/workarounds you're currently using
+
+  - type: checkboxes
+    id: assistance
+    attributes:
+      label: I would be willing to submit a PR to fix this issue
+      description: Assistance is provided if you need help submitting a pull request
+      options:
+        - label: 'Yes'
+        - label: 'No'

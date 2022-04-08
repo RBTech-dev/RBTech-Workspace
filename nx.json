@@ -49,5 +49,6 @@
   "workspaceLayout": {
     "appsDir": "apps",
     "libsDir": "packages"
-  }
+  },
+  "defaultProject": "angular-winbox"
 }
