@@ -45,7 +45,7 @@ jobs:
         run: npm run affected:test -- --base="origin/master" --codeCoverage
 
       - name: Builds components
-        run: npm run affected:build --prod --with-deps --base=main
+        run: npm run build --prod --with-deps --base=main
 
       - name: Raise version of affected libraries
         run: |
