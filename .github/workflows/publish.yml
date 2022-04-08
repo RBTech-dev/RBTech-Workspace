@@ -51,11 +51,14 @@ jobs:
         run: |
           LATEST_TAG=$(git tag -l "v*" --sort=-version:refname | head -n 1)
           LIBS=$(npm run affected:libs --base=$LATEST_TAG --head=HEAD --plain | awk 'NR > 2 && $1 != "Done" { print $1 }')
-          echo "$LIBS"
-          echo "*/"
+          $ echo "$PWD"
+          for eachfile in $yourfilenames
+            do
+              echo $eachfile
+            done
           for LIBRARY in $LIBS
           do
-            cd packages/$LIBRARY
+            cd ./packages/$LIBRARY
             npm version minor --no-git-tag-version --no-push
             echo "Bumping $LIBRARY"
             cd ..
@@ -91,7 +94,7 @@ jobs:
           npm config set https://registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
           for LIBRARY in $(npm run affected:libs --base=$last_version --head=$current_version --plain | awk 'NR > 2 && $1 != "Done" { print $1 }')
           do
-            cd dist/packages/$LIBRARY
+            cd ./dist/packages/$LIBRARY
             npm publish --no-git-tag-version --no-push --yes
             cd ..
             cd ..
