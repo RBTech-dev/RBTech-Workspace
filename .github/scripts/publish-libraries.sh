@@ -21,7 +21,7 @@ COMMIT_MESSAGE="$(git log -1 --pretty=format:"%s")"
 RELEASE_TYPE=${1:-$(getBuildType "$COMMIT_MESSAGE")}
 DRY_RUN=${DRY_RUN:-"False"}
 
-AFFECTED=$(node node_modules/.bin/nx affected:libs --plain --base=origin/master~1)
+AFFECTED=$(npm run affected:libs --plain --base=origin/master~1)
 if [ "$AFFECTED" != "" ]; then
   cd "$PARENT_DIR"
   echo "Copy Environment Files"
@@ -29,7 +29,7 @@ if [ "$AFFECTED" != "" ]; then
   while IFS= read -r -d $' ' lib; do
     echo "Setting version for $lib"
     cd "$PARENT_DIR"
-    cd "$ROOT_DIR/libs/${lib/-//}"
+    cd "$ROOT_DIR/packages/${lib/-//}"
     npm version "$RELEASE_TYPE" -f -m "RBTech Workspace $RELEASE_TYPE"
     echo "Building $lib"
     cd "$PARENT_DIR"
@@ -41,7 +41,7 @@ if [ "$AFFECTED" != "" ]; then
   while IFS= read -r -d $' ' lib; do
     if [ "$DRY_RUN" == "False" ]; then
       echo "Publishing $lib"
-      npm publish "$ROOT_DIR/dist/libs/${lib/-//}" --access=public
+      npm publish "$ROOT_DIR/dist/packages/${lib/-//}" --access=public
     else
       echo "Dry Run, not publishing $lib"
     fi
