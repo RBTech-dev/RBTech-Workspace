@@ -48,13 +48,12 @@ jobs:
         run: npm run build --prod --with-deps --base=main
 
       - name: Raise version of affected libraries
-        uses: actions/checkout@v2
         run: |
           LATEST_TAG=$(git tag -l "v*" --sort=-version:refname | head -n 1)
           LIBS=$(npm run affected:libs --base=$LATEST_TAG --head=HEAD --plain | awk 'NR > 2 && $1 != "Done" { print $1 }')
           for LIBRARY in $LIBS
           do
-            cd ./packages/$LIBRARY
+            cd packages/$LIBRARY
             npm version minor --no-git-tag-version --no-push
             echo "Bumping $LIBRARY"
             cd ..
@@ -83,7 +82,6 @@ jobs:
           force: true
 
       - name: Deploy
-        uses: actions/checkout@v2
         if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
@@ -91,7 +89,7 @@ jobs:
           npm config set https://registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
           for LIBRARY in $(npm run affected:libs --base=$last_version --head=$current_version --plain | awk 'NR > 2 && $1 != "Done" { print $1 }')
           do
-            cd ./dist/packages/$LIBRARY
+            cd dist/packages/$LIBRARY
             npm publish --no-git-tag-version --no-push --yes
             cd ..
             cd ..
