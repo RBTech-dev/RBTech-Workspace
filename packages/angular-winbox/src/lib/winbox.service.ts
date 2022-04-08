@@ -74,4 +74,8 @@ export class WinboxService {
     if (this.winBoxStack.length > 0)
       this.winBoxStack[this.winBoxStack.length - 1].show();
   }
+
+  public test() {
+    console.log('HELLo');
+  }
 }
