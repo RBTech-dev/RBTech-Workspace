@@ -33,6 +33,14 @@ jobs:
     - name: Fetch other branches
       run: git fetch --no-tags --prune --depth=5 origin master
 
+    - name: Cache node modules
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
     - name: Install environment
       run: npm ci --include=dev
 
