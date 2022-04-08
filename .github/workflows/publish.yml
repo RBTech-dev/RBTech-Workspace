@@ -51,7 +51,7 @@ jobs:
         run: |
           LATEST_TAG=$(git tag -l "v*" --sort=-version:refname | head -n 1)
           LIBS=$(npm run affected:libs --base=$LATEST_TAG --head=HEAD --plain | awk 'NR > 2 && $1 != "Done" { print $1 }')
-          $ echo "$PWD"
+          echo "$PWD"
           for eachfile in $yourfilenames
             do
               echo $eachfile
