@@ -92,7 +92,7 @@ jobs:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: |
           npm config set https://registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
-          for LIBRARY in $(npm run affected:libs --base=$last_version --head=$current_version --plain | awk 'NR > 4 && $1 != "Done" && $2 != "NX" { print $2 }')
+          for LIBRARY in $(npm run affected:libs --base=$last_version --head=$current_version --plain | awk '{ print NR }')
           do
             echo "DEPLOY"
             echo $PWD/packages/$LIBRARY
