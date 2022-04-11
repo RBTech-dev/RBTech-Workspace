@@ -50,7 +50,7 @@ jobs:
       - name: Raise version of affected libraries
         run: |
           LATEST_TAG=$(git tag -l "v*" --sort=-version:refname | head -n 1)
-          LIBS=$(npm run affected:libs --base=$LATEST_TAG --head=HEAD --plain)
+          LIBS=$(npm run affected:libs --base=$LATEST_TAG --head=HEAD --plain | awk 'NR > 4 && $1 != "Done" && $2 != "NX" { print $2 }')
           echo $LIBS
           for LIBRARY in $LIBS
           do
@@ -92,7 +92,7 @@ jobs:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: |
           npm config set https://registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
-          for LIBRARY in $(npm run affected:libs --base=$last_version --head=$current_version --plain | awk 'NR > 2 && $1 != "Done" { print $1 }')
+          for LIBRARY in $(npm run affected:libs --base=$last_version --head=$current_version --plain | awk 'NR > 4 && $1 != "Done" && $2 != "NX" { print $2 }')
           do
             echo "DEPLOY"
             echo $PWD/packages/$LIBRARY
