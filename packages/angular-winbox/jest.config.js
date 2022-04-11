@@ -26,5 +26,4 @@ module.exports = {
   ],
   moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
   extensionsToTreatAsEsm: ['.ts'],
-  projects: getJestProjects(),
 };
