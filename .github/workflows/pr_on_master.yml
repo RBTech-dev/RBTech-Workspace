@@ -35,6 +35,7 @@ jobs:
 
         # https://github.com/marketplace/actions/npm-install-cache
       - uses: c-hive/gha-npm-cache@v1
+        if: ${{ !env.ACT }}
 
       - name: Install environment
         run: npm ci --include=dev
