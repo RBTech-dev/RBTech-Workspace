@@ -1,5 +1,5 @@
 {
-  "name": "@rbtech/angular-winbox",
+  "name": "@rbtech.dev/angular-winbox",
   "version": "1.0.0",
   "peerDependencies": {
     "@angular/common": "^13.2.0",
