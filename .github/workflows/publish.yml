@@ -19,6 +19,7 @@ jobs:
       - name: Checkout Code
         #if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
         uses: actions/checkout@v2
+        run: git fetch --prune --unshallow
 
       # Make sure we have all branches
       - name: Fetch other branches
