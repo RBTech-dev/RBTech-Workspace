@@ -78,7 +78,7 @@ jobs:
           commit_user_name: GitHub Action
           commit_user_email: action@github.com
           commit_author: Author <actions@github.com>
-          file_pattern: packages/$LIBRARY/package.json
+          file_pattern: packages/${LIBRARY}/package.json
           push_options: '--force -a || true'
 
       - name: Deploy
