@@ -13,18 +13,17 @@ jobs:
     steps:
       # Checkout code
       - name: Checkout Code
-        #if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
         uses: actions/checkout@v2
-      - run: git fetch --prune --unshallow
+        with:
+          token: ${{ secrets.ACTION_AUTH_TOKEN }}
+
 
       # Make sure we have all branches
       - name: Fetch other branches
-        #if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
         run: git fetch --no-tags --prune --depth=5 origin master
 
       # Setup node
       - name: Use Node.js ${{ matrix.node-version }}
-        #if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
@@ -34,9 +33,18 @@ jobs:
       - uses: c-hive/gha-npm-cache@v1
         if: ${{ !env.ACT }}
 
+      - name: Set variables
+        run: |
+          LATEST_TAG=${{ github.event.release.tag_name }}
+          echo $LATEST_TAG
+          arrIN=(${LATEST_TAG//_/ })
+          echo "LIBRARY=${arrIN[0]}" >> $GITHUB_ENV
+          echo "VERSION=${arrIN[1]}" >> $GITHUB_ENV
+          echo $LIBS
+          echo $VERSION
+
       # Run Install
       - name: Install environment
-        #if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
         run: npm ci
 
       - name: Run lint
@@ -48,14 +56,8 @@ jobs:
       - name: Builds components
         run: npm run build --prod --with-deps --base="origin/master"
 
-      - name: Raise version of tagged libraries
+      - name: Setup version of tagged libraries
         run: |
-          LATEST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
-          arrIN=(${LATEST_TAG//_/ })
-          LIBRARY=${arrIN[0]}
-          VERSION=${arrIN[1]}
-          echo $LIBS
-          echo $VERSION
           if [ -d "$PWD/packages/$LIBRARY" ]; then
             cd $PWD/packages/$LIBRARY
             npm version ${VERSION}  --allow-same-version
@@ -68,37 +70,23 @@ jobs:
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
 
-      - name: Commit files
-        #if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "Release [skip-ci]" -a || true
-
-      - name: Push changes
-        #if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
-        uses: ad-m/github-push-action@master
+      - name: Commit updated library package.json version
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          github_token: ${{ secrets.ACTION_AUTH_TOKEN }}
-          tags: true
-          force: true
+          branch: ${{ github.event.release.target_commitish }}
+          commit_message: chore($LIBRARY)"':'" released $VERSION
+          commit_user_name: GitHub Action
+          commit_user_email: action@github.com
+          commit_author: Author <actions@github.com>
+          file_pattern: packages/$LIBRARY/package.json
+          push_options: '--force -a || true'
 
       - name: Deploy
 
-        #if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
         run: |
-          LATEST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
-          arrIN=(${LATEST_TAG//_/ })
-          LIBRARY=${arrIN[0]}
-          VERSION=${arrIN[1]}
-          echo "DEPLOY"
-          echo $LIBS
-          echo $VERSION
-          npm config set registry https://registry.npmjs.org/
+          echo "Publishing on npmjs ${LIBRARY} - version: ${VERSION}"
           if [ -d "$PWD/packages/$LIBRARY" ]; then
             cd $PWD/packages/$LIBRARY
-            npm config set scope rbtechdev
             npm publish --access=public --ignore-scripts
           else
             echo "No library: ${LIBRARY}"
