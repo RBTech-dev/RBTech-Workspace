@@ -15,7 +15,7 @@ jobs:
       - name: Checkout Code
         #if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
         uses: actions/checkout@v2
-      - run: git fetch --prune --unshallow
+
 
       # Make sure we have all branches
       - name: Fetch other branches
@@ -25,9 +25,10 @@ jobs:
       # Setup node
       - name: Use Node.js ${{ matrix.node-version }}
         #if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org/
 
       # https://github.com/marketplace/actions/npm-install-cache
       - uses: c-hive/gha-npm-cache@v1
@@ -84,6 +85,7 @@ jobs:
           force: true
 
       - name: Deploy
+
         #if: github.event.pull_request.merged == true && contains(github.event.commits[0].message, '[skip-ci]') == false
         run: |
           LATEST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
@@ -93,11 +95,13 @@ jobs:
           echo "DEPLOY"
           echo $LIBS
           echo $VERSION
+          npm config set registry https://registry.npmjs.org/
           if [ -d "$PWD/packages/$LIBRARY" ]; then
             cd $PWD/packages/$LIBRARY
-            npm publish --no-git-tag-version --access=public
-            cd ..
-            cd ..
+            npm config set scope rbtech.dev
+            npm publish --access=public
+          else
+            echo "No library: ${LIBRARY}"
           fi
         env:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
