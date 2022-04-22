@@ -14,7 +14,7 @@ jobs:
       # Checkout code
       - name: Checkout Code
         uses: actions/checkout@v2
-      - run: git fetch --prune --unshallow
+
 
       # Make sure we have all branches
       - name: Fetch other branches
@@ -31,6 +31,16 @@ jobs:
       - uses: c-hive/gha-npm-cache@v1
         if: ${{ !env.ACT }}
 
+      - name: Set variables
+        run: |
+          LATEST_TAG=${{ github.event.release.tag_name }}
+          echo $LATEST_TAG
+          arrIN=(${LATEST_TAG//_/ })
+          echo "LIBRARY=${arrIN[0]}" >> $GITHUB_ENV
+          echo "VERSION=${arrIN[1]}" >> $GITHUB_ENV
+          echo $LIBS
+          echo $VERSION
+
       # Run Install
       - name: Install environment
         run: npm ci
@@ -46,12 +56,6 @@ jobs:
 
       - name: Setup version of tagged libraries
         run: |
-          LATEST_TAG=${{ github.event.release.tag_name }}
-          arrIN=(${LATEST_TAG//_/ })
-          LIBRARY=${arrIN[0]}
-          VERSION=${arrIN[1]}
-          echo $LIBS
-          echo $VERSION
           if [ -d "$PWD/packages/$LIBRARY" ]; then
             cd $PWD/packages/$LIBRARY
             npm version ${VERSION}  --allow-same-version
@@ -81,10 +85,6 @@ jobs:
       - name: Deploy
 
         run: |
-          LATEST_TAG=${{ github.event.release.tag_name }}
-          arrIN=(${LATEST_TAG//_/ })
-          LIBRARY=${arrIN[0]}
-          VERSION=${arrIN[1]}
           echo "Publishing on npmjs ${LIBRARY} - version: ${VERSION}"
           npm config set registry https://registry.npmjs.org/
           if [ -d "$PWD/packages/$LIBRARY" ]; then
