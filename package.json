@@ -1,9 +1,6 @@
 {
   "name": "rbtech",
   "version": "1.0.0",
-  "engines": {
-    "node": ">=14"
-  },
   "scripts": {
     "ng": "nx",
     "build": "ng build",
@@ -108,5 +105,13 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RBTech-dev/RBTech-Workspace.git"
+  },
+  "engines": {
+    "node": ">= 14",
+    "npm": ">= 7"
   }
 }

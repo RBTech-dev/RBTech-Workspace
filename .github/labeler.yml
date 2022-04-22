@@ -1,4 +1,4 @@
-# Add 'Project: angular-wibox' label to any angular-winbox file changes
+# Add 'Project: angular-winbox' label to any angular-winbox file changes
 'Project: angular-winbox':
   - packages/angular-winbox/*
   - packages/angular-winbox/**/*
