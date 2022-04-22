@@ -1,9 +1,6 @@
 {
   "name": "rbtech",
   "version": "1.0.0",
-  "engines": {
-    "node": ">=14"
-  },
   "scripts": {
     "ng": "nx",
     "build": "ng build",
