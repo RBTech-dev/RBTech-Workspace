@@ -99,7 +99,7 @@ jobs:
           if [ -d "$PWD/packages/$LIBRARY" ]; then
             cd $PWD/packages/$LIBRARY
             npm config set scope rbtechdev
-            npm publish --access=public
+            npm publish --access=public --ignore-scripts
           else
             echo "No library: ${LIBRARY}"
           fi
