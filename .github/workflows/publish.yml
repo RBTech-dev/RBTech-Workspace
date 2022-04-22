@@ -104,5 +104,5 @@ jobs:
             echo "No library: ${LIBRARY}"
           fi
         env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
