@@ -108,5 +108,13 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RBTech-dev/RBTech-Workspace.git"
+  },
+  "engines": {
+    "node": ">= 14",
+    "npm": ">= 7"
   }
 }
