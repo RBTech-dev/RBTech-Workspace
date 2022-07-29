@@ -53,18 +53,18 @@ jobs:
       - name: Tests coverage
         run: npm run affected:test -- --base="origin/master" --codeCoverage
 
+      - name: Setup version of tagged libraries
+          run: |
+            if [ -d "$PWD/packages/$LIBRARY" ]; then
+              cd $PWD/packages/$LIBRARY
+              npm version ${VERSION}  --allow-same-version
+              echo "Bumping $LIBRARY"
+              cd ..
+              cd ..
+            fi
+
       - name: Builds components
         run: npm run build --prod --with-deps --base="origin/master"
-
-      - name: Setup version of tagged libraries
-        run: |
-          if [ -d "$PWD/packages/$LIBRARY" ]; then
-            cd $PWD/packages/$LIBRARY
-            npm version ${VERSION}  --allow-same-version
-            echo "Bumping $LIBRARY"
-            cd ..
-            cd ..
-          fi
 
       - name: get-npm-version
         id: package-version
@@ -85,8 +85,8 @@ jobs:
 
         run: |
           echo "Publishing on npmjs ${LIBRARY} - version: ${VERSION}"
-          if [ -d "$PWD/packages/$LIBRARY" ]; then
-            cd $PWD/packages/$LIBRARY
+          if [ -d "$PWD/dist/packages/$LIBRARY" ]; then
+            cd $PWD/dist/packages/$LIBRARY
             npm publish --access=public --ignore-scripts
           else
             echo "No library: ${LIBRARY}"
