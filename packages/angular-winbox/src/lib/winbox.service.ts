@@ -18,7 +18,7 @@ export interface WinBoxContainer<ComponentInstance> {
 export class WinboxService {
   public isThereAWinBox = false;
 
-  get numberOfWinboxes(): number {
+  get numberOfWinBoxes(): number {
     return this.winBoxStack.length;
   }
 
@@ -33,9 +33,7 @@ export class WinboxService {
     options: WinBoxOptions,
     component: Type<ComponentInstance>
   ): WinBoxContainer<ComponentInstance> {
-    const winBox = new WinBox({
-      ...options,
-    });
+    const winBox = new WinBox(options);
 
     const componentFactory =
       this.componentFactoryResolver.resolveComponentFactory(component);
@@ -73,9 +71,5 @@ export class WinboxService {
   public showLastWinbox() {
     if (this.winBoxStack.length > 0)
       this.winBoxStack[this.winBoxStack.length - 1].show();
-  }
-
-  public testMethod() {
-    console.log('TEST');
   }
 }
