@@ -54,14 +54,14 @@ jobs:
         run: npm run affected:test -- --base="origin/master" --codeCoverage
 
       - name: Setup version of tagged libraries
-          run: |
-            if [ -d "$PWD/packages/$LIBRARY" ]; then
-              cd $PWD/packages/$LIBRARY
-              npm version ${VERSION}  --allow-same-version
-              echo "Bumping $LIBRARY"
-              cd ..
-              cd ..
-            fi
+        run: |
+          if [ -d "$PWD/packages/$LIBRARY" ]; then
+            cd $PWD/packages/$LIBRARY
+            npm version ${VERSION}  --allow-same-version
+            echo "Bumping $LIBRARY"
+            cd ..
+            cd ..
+          fi
 
       - name: Builds components
         run: npm run build --prod --with-deps --base="origin/master"
