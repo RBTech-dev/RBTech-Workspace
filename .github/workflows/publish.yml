@@ -53,9 +53,6 @@ jobs:
       - name: Tests coverage
         run: npm run affected:test -- --base="origin/master" --codeCoverage
 
-      - name: Builds components
-        run: npm run build --prod --with-deps --base="origin/master"
-
       - name: Setup version of tagged libraries
         run: |
           if [ -d "$PWD/packages/$LIBRARY" ]; then
@@ -65,6 +62,9 @@ jobs:
             cd ..
             cd ..
           fi
+
+      - name: Builds components
+        run: npm run build --prod --with-deps --base="origin/master"
 
       - name: get-npm-version
         id: package-version
@@ -78,15 +78,15 @@ jobs:
           commit_user_name: GitHub Action
           commit_user_email: action@github.com
           commit_author: Author <actions@github.com>
-          file_pattern: packages/$LIBRARY/package.json
+          file_pattern: packages/${LIBRARY}/package.json
           push_options: '--force -a || true'
 
       - name: Deploy
 
         run: |
           echo "Publishing on npmjs ${LIBRARY} - version: ${VERSION}"
-          if [ -d "$PWD/packages/$LIBRARY" ]; then
-            cd $PWD/packages/$LIBRARY
+          if [ -d "$PWD/dist/packages/$LIBRARY" ]; then
+            cd $PWD/dist/packages/$LIBRARY
             npm publish --access=public --ignore-scripts
           else
             echo "No library: ${LIBRARY}"

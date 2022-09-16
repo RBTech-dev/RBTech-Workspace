@@ -36,8 +36,8 @@ describe('WinBoxServiceService', () => {
 
   test('number of Winbox instances should be greater than 0', () => {
     service.openWinBox({}, SimpleComponent);
-    expect(service.numberOfWinboxes).toBeGreaterThan(0);
-    expect(service.numberOfWinboxes).toBe(1);
+    expect(service.numberOfWinBoxes).toBeGreaterThan(0);
+    expect(service.numberOfWinBoxes).toBe(1);
   });
 
   test('last winbox should be shown', () => {
@@ -50,8 +50,8 @@ describe('WinBoxServiceService', () => {
 
   test('number of opened winbox should be decreased', () => {
     const winBoxWrapper = service.openWinBox({}, SimpleComponent);
-    expect(service.numberOfWinboxes).toBe(1);
+    expect(service.numberOfWinBoxes).toBe(1);
     winBoxWrapper.winBox.close();
-    expect(service.numberOfWinboxes).toBe(0);
+    expect(service.numberOfWinBoxes).toBe(0);
   });
 });

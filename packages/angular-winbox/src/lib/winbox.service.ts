@@ -5,8 +5,8 @@ import {
   Type,
 } from '@angular/core';
 import 'winbox';
-import WinBox from 'winbox';
 
+declare const WinBox: WinBox.WinBoxConstructor;
 export type WinBoxOptions = WinBox.Params;
 
 export interface WinBoxContainer<ComponentInstance> {
@@ -16,26 +16,23 @@ export interface WinBoxContainer<ComponentInstance> {
 
 @Injectable({ providedIn: 'root' })
 export class WinboxService {
-  public isThereAWinBox = false;
-
-  get numberOfWinboxes(): number {
-    return this.winBoxStack.length;
-  }
-
   private winBoxStack: WinBox[] = [];
+  public isThereAWinBox = false;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private injector: Injector
   ) {}
 
+  get numberOfWinBoxes(): number {
+    return this.winBoxStack.length;
+  }
+
   openWinBox<ComponentInstance>(
     options: WinBoxOptions,
     component: Type<ComponentInstance>
   ): WinBoxContainer<ComponentInstance> {
-    const winBox = new WinBox({
-      ...options,
-    });
+    const winBox = new WinBox(options);
 
     const componentFactory =
       this.componentFactoryResolver.resolveComponentFactory(component);
@@ -73,9 +70,5 @@ export class WinboxService {
   public showLastWinbox() {
     if (this.winBoxStack.length > 0)
       this.winBoxStack[this.winBoxStack.length - 1].show();
-  }
-
-  public testMethod() {
-    console.log('TEST');
   }
 }
