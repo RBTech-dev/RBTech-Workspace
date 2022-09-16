@@ -1,6 +1,6 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "packages/angular-winbox",
   "sourceRoot": "packages/angular-winbox/src",
   "prefix": "rbtech",
   "targets": {
@@ -24,7 +24,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/packages/angular-winbox"],
       "options": {
-        "jestConfig": "packages/angular-winbox/jest.config.js",
+        "jestConfig": "packages/angular-winbox/jest.config.ts",
         "passWithNoTests": true
       }
     },
