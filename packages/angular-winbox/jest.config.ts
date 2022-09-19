@@ -1,6 +1,7 @@
+/* eslint-disable */
 const esModules = ['winbox', '@angular', '@ngrx'].join('|');
 const { getJestProjects } = require('@nrwl/jest');
-module.exports = {
+export default {
   displayName: 'angular-winbox',
   preset: '../../jest.preset.js',
   testMatch: ['**/+(*.)+(spec|test).+(ts|js)?(x)'],
