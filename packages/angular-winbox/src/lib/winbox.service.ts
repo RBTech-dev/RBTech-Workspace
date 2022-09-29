@@ -67,6 +67,7 @@ export class WinboxService {
     this.isThereAWinBox = false;
   }
 
+  /** This method show the last Winbox created . */
   public showLastWinbox() {
     if (this.winBoxStack.length > 0)
       this.winBoxStack[this.winBoxStack.length - 1].show();
