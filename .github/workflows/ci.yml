@@ -130,4 +130,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACTION_AUTH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: |
-          npx nx affected --target release --all
+          npx nx affected --target release --all --verbose
