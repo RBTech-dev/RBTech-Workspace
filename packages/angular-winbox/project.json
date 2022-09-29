@@ -36,6 +36,13 @@
           "packages/angular-winbox/src/**/*.html"
         ]
       }
+    },
+    "release": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx semantic-release-plus --extends ./packages/angular-winbox/release.config.js"
+      }
     }
   },
   "tags": []
