@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   ComponentFactoryResolver,
   Injectable,
   Injector,
@@ -12,6 +13,7 @@ export type WinBoxOptions = WinBox.Params;
 export interface WinBoxContainer<ComponentInstance> {
   winBox: WinBox;
   instance: ComponentInstance;
+  changeDetectorRef?: ChangeDetectorRef;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -56,7 +58,11 @@ export class WinboxService {
     this.isThereAWinBox = true;
     this.winBoxStack.push(winBox);
     winBox.hide();
-    return { winBox, instance: componentRef.instance };
+    return {
+      winBox,
+      instance: componentRef.instance,
+      changeDetectorRef: componentRef.injector.get(ChangeDetectorRef),
+    };
   }
 
   public closeAllWinBoxes() {
