@@ -1,6 +1,6 @@
 {
   "name": "@rbtechdev/angular-winbox",
-  "version": "1.1.19-semantic-release",
+  "version": "1.1.20",
   "peerDependencies": {
     "@angular/common": "^9 || ^10 || ^11 || ^12 || ^13 || ^14",
     "@angular/core": "^9 || ^10 || ^11 || ^12 || ^13 || ^14",
