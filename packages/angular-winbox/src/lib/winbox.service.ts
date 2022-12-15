@@ -85,4 +85,14 @@ export class WinboxService {
     if (this.winBoxStack.length > 0)
       this.winBoxStack[this.winBoxStack.length - 1].show();
   }
+
+  /** This method minimize a Winbox selected by id*/
+  public minimizeWinbox(id: string | number) {
+    this.winBoxStack.find((winbox) => winbox.id === id)?.minimize(false);
+  }
+
+  /** This method maximize a Winbox selected by id*/
+  public maximizeWinbox(id: string | number) {
+    this.winBoxStack.find((winbox) => winbox.id === id)?.maximize(false);
+  }
 }
