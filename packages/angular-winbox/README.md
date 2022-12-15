@@ -34,6 +34,12 @@ constructor(winBoxService : WinboxService) {}
 // Open the last created WinBox.
 this.winBoxService.showLastWinbox();
 
+// Maximize a WinBox by id.
+this.winBoxService.maximizeWinbox(id: string | number);
+
+// Minimize a WinBox by id.
+this.winBoxService.minimizeWinbox(id: string | number);
+
 // Close all the created winBox.
 this.winBoxService.closeAllWinBoxes();
 
