@@ -1,4 +1,6 @@
 {
+  "name": "winbox-example-app",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/winbox-example-app/src",
   "prefix": "rbtech",
@@ -82,7 +84,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/winbox-example-app"],
+      "outputs": ["{workspaceRoot}/coverage/apps/winbox-example-app"],
       "options": {
         "jestConfig": "apps/winbox-example-app/jest.config.ts",
         "passWithNoTests": true
