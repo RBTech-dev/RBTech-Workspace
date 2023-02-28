@@ -1,9 +1,0 @@
-{
-  "version": 2,
-  "projects": {
-    "angular-winbox": "packages/angular-winbox",
-    "winbox-example-app": "apps/winbox-example-app",
-    "winbox-example-app-e2e": "apps/winbox-example-app-e2e"
-  },
-  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
-}
