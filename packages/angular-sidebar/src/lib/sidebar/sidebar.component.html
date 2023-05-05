@@ -1,4 +1,8 @@
-<nav id="sidebar" class="sidebar">
+<nav
+  id="sidebar"
+  class="sidebar animate"
+  [@slideAnimation]="(sidebarService.getIsToggle() | async) ? 'hide' : 'show'"
+>
   <div class="sidebar-content">
     <perfect-scrollbar>
       <div class="sidebar-header">
@@ -92,46 +96,52 @@
   <div class="sidebar-footer" *ngIf="menu">
     <ng-container *ngFor="let footerMenu of menu.footerMenus">
       <ng-container *ngIf="footerMenu.type === 'dropdown'">
-        <div class="dropdown" dropdown>
-          <a href="{{ footerMenu.href }}" dropdownToggle>
+        <div class="dropdown" ngbDropdown container="body" placement="top-end">
+          <a href="{{ footerMenu.href }}" ngbDropdownToggle role="button">
             <fa-icon *ngIf="footerMenu.icon" [icon]="footerMenu.icon"></fa-icon>
             <span
               *ngIf="footerMenu.badge"
               class="badge badge-pill footer-action"
               [ngClass]="footerMenu.badge.class"
             >
-              {{ footerMenu.badge?.text }}
+              {{ footerMenu.badge.text }}
             </span>
           </a>
-          <div class="dropdown-menu dropdown-footer" *dropdownMenu>
-            <div class="dropdown-header">
-              <fa-icon
-                *ngIf="footerMenu.icon"
-                [icon]="footerMenu.icon"
-              ></fa-icon>
-              {{ footerMenu.dropdownHeaderTitle }}
-            </div>
-            <div class="dropdown-divider"></div>
-            <a
-              *ngFor="let dropdownItem of footerMenu.dropdownItems"
-              class="dropdown-item"
-              href="{{ footerMenu.href }}"
-            >
-              <div class="dropdown-content">
-                <div class="icon">
-                  <fa-icon [icon]="dropdownItem.icon"></fa-icon>
-                </div>
-                <div class="content">
-                  <div class="dropdown-item-detail">
-                    {{ dropdownItem.text }}
+          <ul ngbDropdownMenu class="dropdown-menu dropdown-footer">
+            <li ngbDropdownItem class="p-0" [disabled]="true">
+              <a class="dropdown-item dropdown-header fs-5">
+                <fa-icon
+                  *ngIf="footerMenu.icon"
+                  [icon]="footerMenu.icon"
+                ></fa-icon>
+                {{ footerMenu.dropdownHeaderTitle }}
+              </a>
+            </li>
+            <ng-container *ngIf="footerMenu.dropdownItems">
+              <li
+                ngbDropdownItem
+                class="p-0"
+                *ngFor="let dropdownItem of footerMenu.dropdownItems"
+              >
+                <a class="dropdown-item" href="{{ footerMenu.href }}">
+                  <div class="dropdown-content">
+                    <div class="d-flex">
+                      <fa-icon
+                        class="icon me-1"
+                        [icon]="dropdownItem.icon"
+                      ></fa-icon>
+                      <div class="dropdown-item-detail fs-5">
+                        {{ dropdownItem.text }}
+                      </div>
+                    </div>
+                    <div class="dropdown-item-subtitle fs-6">
+                      {{ dropdownItem.subtitle }}
+                    </div>
                   </div>
-                  <div class="dropdown-item-subtitle">
-                    {{ dropdownItem.subtitle }}
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
+                </a>
+              </li>
+            </ng-container>
+          </ul>
         </div>
       </ng-container>
       <ng-container *ngIf="footerMenu.type === 'simple'">
@@ -141,6 +151,13 @@
           </a>
         </div>
       </ng-container>
+    </ng-container>
+    <ng-container>
+      <div>
+        <a class="cursor-pointer" (click)="sidebarService.toggle()">
+          <fa-icon [icon]="faAnglesRight"></fa-icon>
+        </a>
+      </div>
     </ng-container>
   </div>
 </nav>

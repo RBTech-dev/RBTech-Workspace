@@ -29,7 +29,7 @@ export interface SidebarFooterMenuModel {
   icon?: IconProp;
   badge?: SidebarMenuBadge;
   dropdownHeaderTitle?: string;
-  dropdownItems: DropdownItem[];
+  dropdownItems?: DropdownItem[];
 }
 
 export interface SidebarContentMenuModel {

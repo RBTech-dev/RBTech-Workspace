@@ -284,51 +284,6 @@
       font-size: 0.9rem;
     }
 
-    .dropdown-footer {
-      .dropdown-item {
-        padding: 0.25rem 1rem;
-      }
-
-      .dropdown-header {
-        padding: 0 1rem;
-      }
-
-      .dropdown-content {
-        display: flex;
-
-        .icon {
-          width: 40px;
-          height: 40px;
-
-          fa-icon {
-            width: 35px;
-            height: 35px;
-            text-align: center;
-            line-height: 35px;
-            border-radius: 4px;
-          }
-        }
-
-        .content {
-          line-height: 1.6;
-          padding-left: 5px;
-          width: calc(100% - 40px);
-
-          .dropdown-item-subtitle {
-            font-size: 0.7rem;
-            color: #828282;
-          }
-
-          .dropdown-item-detail {
-            font-size: 12px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-        }
-      }
-    }
-
     .badge-sonar {
       display: inline-block;
       background: #980303;
@@ -438,4 +393,25 @@ $img-shadow-color: rgba(0, 0, 0, 0.5);
   .sidebar-footer > div:last-child {
     border-right: none;
   }
+}
+
+.animate-slide.ng-enter,
+.animate-slide.ng-leave {
+  transition: transform 0.5s;
+}
+
+.animate-slide.ng-enter {
+  transform: translateY(-100%);
+}
+
+.animate-slide.ng-enter-active {
+  transform: translateY(0);
+}
+
+.animate-slide.ng-leave {
+  transform: translateY(0);
+}
+
+.animate-slide.ng-leave-active {
+  transform: translateY(100%);
 }

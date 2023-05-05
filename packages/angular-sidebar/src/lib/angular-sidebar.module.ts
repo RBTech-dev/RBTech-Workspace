@@ -8,6 +8,7 @@ import {
   PERFECT_SCROLLBAR_CONFIG,
 } from 'ngx-perfect-scrollbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -19,6 +20,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BrowserAnimationsModule,
     FontAwesomeModule,
     PerfectScrollbarModule,
+    NgbDropdownModule,
   ],
   declarations: [SidebarComponent],
   providers: [

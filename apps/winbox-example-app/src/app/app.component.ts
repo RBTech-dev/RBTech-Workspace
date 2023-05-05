@@ -54,7 +54,25 @@ export class AppComponent implements OnInit {
         ],
       },
     ],
-    footerMenus: [],
+    footerMenus: [
+      {
+        type: 'simple',
+        icon: this.faIcon,
+      },
+      {
+        type: 'dropdown',
+        icon: this.faIcon,
+        dropdownHeaderTitle: 'Hello',
+        href: '#',
+        dropdownItems: [
+          {
+            text: 'HELLO',
+            icon: this.faIcon,
+            subtitle: 'HELLO S',
+          },
+        ],
+      },
+    ],
   };
 
   constructor(private winboxService: WinboxService) {}
