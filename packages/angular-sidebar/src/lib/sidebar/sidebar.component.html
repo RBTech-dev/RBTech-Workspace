@@ -1,0 +1,146 @@
+<nav id="sidebar" class="sidebar">
+  <div class="sidebar-content">
+    <perfect-scrollbar>
+      <div class="sidebar-header">
+        <a href="{{ menu?.sidebarTitleHref }}">{{ menu?.sidebarTitle }}</a>
+      </div>
+
+      <div class="sidebar-profile">
+        <div class="user-pic">
+          <img
+            class="img-responsive img-rounded"
+            src="{{ menu?.sidebarUsrPicSrc }}"
+            alt="User picture"
+          />
+        </div>
+        <div class="user-info">
+          <span class="user-name">
+            <strong>{{ menu?.username }}</strong>
+          </span>
+          <span class="user-subtitle">{{ menu?.subtitle }}</span>
+          <span class="user-status">
+            <i class="fa fa-circle"></i>
+            <span>{{ menu?.status }}</span>
+          </span>
+        </div>
+      </div>
+      <div *ngIf="menu?.isSearchVisible" class="sidebar-search">
+        <div>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control search-menu"
+              placeholder="{{ menu?.placeholderSearch }}"
+            />
+            <span class="input-group-text">
+              <fa-icon [icon]="faSearch" aria-hidden="true"></fa-icon>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-menu">
+        <ul *ngIf="menu">
+          <li
+            *ngFor="let menu of menu.contentMenus"
+            [ngClass]="{
+              active: menu.active,
+              'sidebar-dropdown': menu.type === 'dropdown',
+              'header-menu': menu.type === 'header'
+            }"
+          >
+            <span *ngIf="menu.type === 'header'">{{ menu.title }}</span>
+            <a
+              *ngIf="menu.type !== 'header'"
+              href="{{ menu.href }}"
+              (click)="toggle(menu)"
+            >
+              <fa-icon *ngIf="menu.icon" [icon]="menu.icon"></fa-icon>
+              <span>{{ menu.title }}</span>
+              <span
+                *ngIf="menu.badge"
+                class="badge badge-pill"
+                [ngClass]="menu.badge.class"
+              >
+                {{ menu.badge.text }}
+              </span>
+            </a>
+            <div
+              *ngIf="menu.type === 'dropdown'"
+              class="sidebar-submenu"
+              [@slide]="getState(menu)"
+            >
+              <ul *ngIf="menu.subMenus">
+                <li *ngFor="let submenu of menu.subMenus">
+                  <a href="{{ submenu.href }}">
+                    {{ submenu.title }}
+                    <span
+                      *ngIf="submenu.badge"
+                      class="badge badge-pill"
+                      [ngClass]="submenu.badge.class"
+                    >
+                      {{ submenu.badge.text }}
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </perfect-scrollbar>
+  </div>
+  <div class="sidebar-footer" *ngIf="menu">
+    <ng-container *ngFor="let footerMenu of menu.footerMenus">
+      <ng-container *ngIf="footerMenu.type === 'dropdown'">
+        <div class="dropdown" dropdown>
+          <a href="{{ footerMenu.href }}" dropdownToggle>
+            <fa-icon *ngIf="footerMenu.icon" [icon]="footerMenu.icon"></fa-icon>
+            <span
+              *ngIf="footerMenu.badge"
+              class="badge badge-pill footer-action"
+              [ngClass]="footerMenu.badge.class"
+            >
+              {{ footerMenu.badge?.text }}
+            </span>
+          </a>
+          <div class="dropdown-menu dropdown-footer" *dropdownMenu>
+            <div class="dropdown-header">
+              <fa-icon
+                *ngIf="footerMenu.icon"
+                [icon]="footerMenu.icon"
+              ></fa-icon>
+              {{ footerMenu.dropdownHeaderTitle }}
+            </div>
+            <div class="dropdown-divider"></div>
+            <a
+              *ngFor="let dropdownItem of footerMenu.dropdownItems"
+              class="dropdown-item"
+              href="{{ footerMenu.href }}"
+            >
+              <div class="dropdown-content">
+                <div class="icon">
+                  <fa-icon [icon]="dropdownItem.icon"></fa-icon>
+                </div>
+                <div class="content">
+                  <div class="dropdown-item-detail">
+                    {{ dropdownItem.text }}
+                  </div>
+                  <div class="dropdown-item-subtitle">
+                    {{ dropdownItem.subtitle }}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="footerMenu.type === 'simple'">
+        <div>
+          <a href="{{ footerMenu.href }}">
+            <fa-icon *ngIf="footerMenu.icon" [icon]="footerMenu.icon"></fa-icon>
+          </a>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</nav>
