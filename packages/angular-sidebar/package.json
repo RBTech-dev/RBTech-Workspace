@@ -2,8 +2,16 @@
   "name": "@rbtechdev/angular-sidebar",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^15.2.0",
-    "@angular/core": "^15.2.0"
+    "@angular/common": "^15 || ^ 16",
+    "@angular/core": "^15 || ^ 16",
+    "@fortawesome/angular-fontawesome": "^0",
+    "@fortawesome/fontawesome-svg-core": "^6",
+    "@fortawesome/free-regular-svg-icons": "^6",
+    "@fortawesome/free-solid-svg-icons": "^6",
+    "@ng-bootstrap/ng-bootstrap": "^14",
+    "@popperjs/core": "^2",
+    "bootstrap": "^5",
+    "ngx-perfect-scrollbar": "^10"
   },
   "dependencies": {
     "tslib": "^2.3.0"
