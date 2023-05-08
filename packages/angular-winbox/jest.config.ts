@@ -6,7 +6,6 @@ export default {
   preset: '../../jest.preset.js',
   testMatch: ['**/+(*.)+(spec|test).+(ts|js)?(x)'],
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/packages/angular-winbox',
   transform: {
     '^.+\\.(ts|js|mjs|html|svg)$': 'jest-preset-angular',
     [`(${esModules}).+\\.(js|jsx|mjs)$`]: 'babel-jest',
