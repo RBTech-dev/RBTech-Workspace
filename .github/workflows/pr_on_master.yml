@@ -37,7 +37,9 @@ jobs:
       - uses: c-hive/gha-npm-cache@v1
         if: ${{ !env.ACT }}
 
-      - uses: nrwl/nx-set-shas@v2
+      - uses: nrwl/nx-set-shas@v3
+        with:
+          main-branch-name: 'master'
 
       - name: Install environment
         run: npm ci --include=dev
