@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   faIcon = faQuestion;
   menu: SidebarMenuModel = {
     sidebarTitle: 'SIDEBAR',
-    status: 'Online',
+    status: '',
     username: 'USER',
     subtitle: 'Admin',
     sidebarTitleHref: '/home',
@@ -26,6 +26,11 @@ export class AppComponent implements OnInit {
         title: 'HEADER',
         type: 'header',
         visible: true,
+        badge: {
+          visible: true,
+          class: 'badge bg-secondary',
+          text: '4',
+        },
       },
       {
         title: 'MENU 1',
@@ -45,11 +50,21 @@ export class AppComponent implements OnInit {
         visible: true,
         icon: this.faIcon,
         href: '#',
+        badge: {
+          visible: true,
+          class: 'badge bg-secondary',
+          text: '4',
+        },
         subMenus: [
           {
             title: 'SUBMENU 1',
             visible: true,
             href: '/g',
+            badge: {
+              visible: true,
+              class: 'badge bg-secondary',
+              text: 'New',
+            },
           },
         ],
       },

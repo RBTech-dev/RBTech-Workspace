@@ -6,7 +6,11 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { SidebarContentMenuModel, SidebarMenuModel } from '../models';
+import {
+  SidebarContentMenuModel,
+  SidebarMenuModel,
+  SidebarMenuThemeModel,
+} from '../models';
 import { faAnglesRight, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { SidebarService } from '../services/sidebar.service';
 
@@ -39,10 +43,34 @@ import { SidebarService } from '../services/sidebar.service';
 })
 export class SidebarComponent {
   @Input() menu?: SidebarMenuModel;
+  @Input() theme: SidebarMenuThemeModel = {
+    bgSidebarWrapper: '#1d1d1d',
+    borderColor: '#2b2b2b',
+    footerTopBorderColor: '#3a3a3a',
+    color: '#bdbdbd',
+    headerMenuColor: '#6c7b88',
+    hoverColor: '#ffffff',
+    shadowColor: '#131212',
+    bgScrollbar: '#636363',
+  };
+
   protected faAnglesRight = faAnglesRight;
   protected faSearch = faSearch;
 
   constructor(protected sidebarService: SidebarService) {}
+
+  get style(): string {
+    return `
+        --theme-bg-sidebar-wrapper: ${this.theme.bgSidebarWrapper};
+        --theme-border-color: ${this.theme.borderColor};
+        --theme-footer-top-border-color: ${this.theme.footerTopBorderColor};
+        --theme-color: ${this.theme.color};
+        --theme-header-menu-color: ${this.theme.headerMenuColor};
+        --theme-hover-color: ${this.theme.hoverColor};
+        --theme-shadow-color: ${this.theme.shadowColor};
+        --theme-bg-scrollbar: ${this.theme.bgScrollbar};`;
+  }
+
   toggle(currentMenu: SidebarContentMenuModel) {
     if (this.menu && currentMenu.type === 'dropdown') {
       this.menu.contentMenus.forEach((element) => {

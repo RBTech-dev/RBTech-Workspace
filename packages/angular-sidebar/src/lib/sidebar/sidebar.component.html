@@ -1,4 +1,5 @@
 <nav
+  [style]="style"
   id="sidebar"
   class="sidebar animate"
   [@slideAnimation]="(sidebarService.getIsToggle() | async) ? 'hide' : 'show'"
@@ -22,7 +23,7 @@
             <strong>{{ menu?.username }}</strong>
           </span>
           <span class="user-subtitle">{{ menu?.subtitle }}</span>
-          <span class="user-status">
+          <span *ngIf="menu?.status" class="user-status">
             <i class="fa fa-circle"></i>
             <span>{{ menu?.status }}</span>
           </span>
@@ -58,7 +59,11 @@
               href="{{ menu.href }}"
               (click)="toggle(menu)"
             >
-              <fa-icon *ngIf="menu.icon" [icon]="menu.icon"></fa-icon>
+              <fa-icon
+                *ngIf="menu.icon"
+                [icon]="menu.icon"
+                style="background-color: transparent"
+              ></fa-icon>
               <span>{{ menu.title }}</span>
               <span
                 *ngIf="menu.badge"
