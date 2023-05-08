@@ -14,8 +14,8 @@
     "affected:dep-graph": "nx affected:dep-graph",
     "affected": "nx affected",
     "format": "nx format:write",
-    "format:write": "nx format:write",
-    "format:check": "nx format:check",
+    "format:write": "nx format:write --verbose",
+    "format:check": "nx format:check --verbose",
     "update": "ng update @nrwl/workspace",
     "update:check": "ng update",
     "lint": "nx workspace-lint && ng lint",
@@ -43,7 +43,6 @@
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@ng-bootstrap/ng-bootstrap": "^14.1.1",
-
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",
     "ngx-perfect-scrollbar": "^10.1.1",
