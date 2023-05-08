@@ -3,6 +3,7 @@ export default {
   displayName: 'winbox-example-app',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+  coverageDirectory: '../../coverage/apps/winbox-example-app',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
     '^.+.(ts|js|html|svg)$': 'ts-jest',
