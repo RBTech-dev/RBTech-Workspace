@@ -1,9 +1,12 @@
-const nxPreset = require('@nrwl/jest/preset').default;
+const nxPreset = require('@nrwl/jest/preset');
 
 module.exports = {
-  ...nxPreset,
-  moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
+  testMatch: ['**/+(*.)+(spec|test).+(ts|js)?(x)'],
+  resolver: '@nrwl/jest/plugins/resolver',
+  moduleFileExtensions: ['ts', 'js', 'html'],
+  coverageReporters: ['html'],
+  testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.(ts|js|mjs|html|svg)$': 'jest-preset-angular',
+    '^.+\\.(ts|js|html)$': 'jest-preset-angular',
   },
 };

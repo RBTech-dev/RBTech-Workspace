@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { WinboxService } from './winbox.service';
 import { Component } from '@angular/core';
-import WinBox from 'winbox';
+declare const WinBox: WinBox.WinBoxConstructor;
+export type WinBoxOptions = WinBox.Params;
 
 @Component({ selector: 'rbtech-app-welcome', template: '' })
 class SimpleComponent {}

@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SidebarComponent } from './sidebar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 describe('SidebarComponent', () => {
   let component: SidebarComponent;
@@ -8,6 +10,7 @@ describe('SidebarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [BrowserAnimationsModule, PerfectScrollbarModule],
       declarations: [SidebarComponent],
     }).compileComponents();
 

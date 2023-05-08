@@ -18,6 +18,7 @@ export default {
     [`(${esModules}).+\\.(js|jsx|mjs)$`]: 'babel-jest',
     '^.+.(ts|js|html)$': 'ts-jest',
   },
+  testEnvironment: 'jsdom',
   resolver: '@nrwl/jest/plugins/resolver',
   transformIgnorePatterns: [`/node_modules/(?!${esModules}/)`],
   snapshotSerializers: [
