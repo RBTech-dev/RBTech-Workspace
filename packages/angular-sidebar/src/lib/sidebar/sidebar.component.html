@@ -7,7 +7,12 @@
   <div class="sidebar-content">
     <perfect-scrollbar>
       <div class="sidebar-header">
-        <a href="{{ menu?.sidebarTitleHref }}">{{ menu?.sidebarTitle }}</a>
+        <a
+          role="button"
+          (click)="navigationEmitted.emit(menu?.sidebarTitleHref)"
+        >
+          {{ menu?.sidebarTitle }}
+        </a>
       </div>
 
       <div class="sidebar-profile">
@@ -52,13 +57,10 @@
               'sidebar-dropdown': menu.type === 'dropdown',
               'header-menu': menu.type === 'header'
             }"
+            role="button"
           >
             <span *ngIf="menu.type === 'header'">{{ menu.title }}</span>
-            <a
-              *ngIf="menu.type !== 'header'"
-              href="{{ menu.href }}"
-              (click)="toggle(menu)"
-            >
+            <a *ngIf="menu.type !== 'header'" (click)="toggle(menu)">
               <fa-icon
                 *ngIf="menu.icon"
                 [icon]="menu.icon"
@@ -80,7 +82,10 @@
             >
               <ul *ngIf="menu.subMenus">
                 <li *ngFor="let submenu of menu.subMenus">
-                  <a href="{{ submenu.href }}">
+                  <a
+                    role="button"
+                    (click)="navigationEmitted.emit(submenu.href)"
+                  >
                     {{ submenu.title }}
                     <span
                       *ngIf="submenu.badge"
@@ -102,7 +107,11 @@
     <ng-container *ngFor="let footerMenu of menu.footerMenus">
       <ng-container *ngIf="footerMenu.type === 'dropdown'">
         <div class="dropdown" ngbDropdown container="body" placement="top-end">
-          <a href="{{ footerMenu.href }}" ngbDropdownToggle role="button">
+          <a
+            ngbDropdownToggle
+            (click)="navigationEmitted.emit(footerMenu.href)"
+            role="button"
+          >
             <fa-icon *ngIf="footerMenu.icon" [icon]="footerMenu.icon"></fa-icon>
             <span
               *ngIf="footerMenu.badge"
@@ -128,7 +137,11 @@
                 class="p-0"
                 *ngFor="let dropdownItem of footerMenu.dropdownItems"
               >
-                <a class="dropdown-item" href="{{ footerMenu.href }}">
+                <a
+                  class="dropdown-item"
+                  role="button"
+                  (click)="navigationEmitted.emit(footerMenu.href)"
+                >
                   <div class="dropdown-content">
                     <div class="d-flex">
                       <fa-icon
@@ -151,7 +164,7 @@
       </ng-container>
       <ng-container *ngIf="footerMenu.type === 'simple'">
         <div>
-          <a href="{{ footerMenu.href }}">
+          <a role="button" (click)="navigationEmitted.emit(footerMenu.href)">
             <fa-icon *ngIf="footerMenu.icon" [icon]="footerMenu.icon"></fa-icon>
           </a>
         </div>
@@ -159,7 +172,7 @@
     </ng-container>
     <ng-container>
       <div>
-        <a class="cursor-pointer" (click)="sidebarService.toggle()">
+        <a role="button" (click)="sidebarService.toggle()">
           <fa-icon [icon]="faAnglesRight"></fa-icon>
         </a>
       </div>

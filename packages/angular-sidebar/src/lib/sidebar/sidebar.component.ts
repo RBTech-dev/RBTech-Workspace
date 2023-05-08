@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   animate,
   state,
@@ -53,6 +53,7 @@ export class SidebarComponent {
     shadowColor: '#131212',
     bgScrollbar: '#636363',
   };
+  @Output() navigationEmitted = new EventEmitter<string>();
 
   protected faAnglesRight = faAnglesRight;
   protected faSearch = faSearch;
@@ -72,14 +73,20 @@ export class SidebarComponent {
   }
 
   toggle(currentMenu: SidebarContentMenuModel) {
-    if (this.menu && currentMenu.type === 'dropdown') {
-      this.menu.contentMenus.forEach((element) => {
-        if (element === currentMenu) {
-          currentMenu.active = !currentMenu.active;
-        } else {
-          element.active = false;
-        }
-      });
+    if (this.menu) {
+      switch (currentMenu.type) {
+        case 'dropdown':
+          this.menu.contentMenus.forEach((element) => {
+            if (element === currentMenu) {
+              currentMenu.active = !currentMenu.active;
+            } else {
+              element.active = false;
+            }
+          });
+          break;
+        case 'simple':
+          this.navigationEmitted.emit(currentMenu.href);
+      }
     }
   }
 
