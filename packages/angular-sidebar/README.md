@@ -10,18 +10,18 @@ nmp install @rbtechdev\angular-sidebar
 Prior to use, it is necessary to add Bootstrap CSS to your application (see [Bootstrap instructions](https://getbootstrap.com/docs/5.2/getting-started/download/))
 
 In case you're using CSS, you just need to add Bootstrap styles to your angular.json configuration:
-```json
-"yourApp": {
-  "architect": {
-    "build": {
-      "options": {
-        "styles": [
-          "node_modules/bootstrap/dist/css/bootstrap.min.css"
-        ]
+```
+  "yourApp": {
+    "architect": {
+      "build": {
+        "options": {
+          "styles": [
+            "node_modules/bootstrap/dist/css/bootstrap.min.css"
+          ]
+        }
       }
     }
   }
-}
 ```
 In case you're using SCSS, please add this to your styles.scss directly:
 ```scss
