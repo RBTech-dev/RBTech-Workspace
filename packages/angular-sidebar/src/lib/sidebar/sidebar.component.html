@@ -1,0 +1,181 @@
+<nav
+  [style]="style"
+  id="sidebar"
+  class="sidebar animate"
+  [@slideAnimation]="(sidebarService.getIsToggle() | async) ? 'hide' : 'show'"
+>
+  <div class="sidebar-content">
+    <perfect-scrollbar>
+      <div class="sidebar-header">
+        <a
+          role="button"
+          (click)="navigationEmitted.emit(menu?.sidebarTitleHref)"
+        >
+          {{ menu?.sidebarTitle }}
+        </a>
+      </div>
+
+      <div class="sidebar-profile">
+        <div class="user-pic">
+          <img
+            class="img-responsive img-rounded"
+            src="{{ menu?.sidebarUsrPicSrc }}"
+            alt="User picture"
+          />
+        </div>
+        <div class="user-info">
+          <span class="user-name">
+            <strong>{{ menu?.username }}</strong>
+          </span>
+          <span class="user-subtitle">{{ menu?.subtitle }}</span>
+          <span *ngIf="menu?.status" class="user-status">
+            <i class="fa fa-circle"></i>
+            <span>{{ menu?.status }}</span>
+          </span>
+        </div>
+      </div>
+      <div *ngIf="menu?.isSearchVisible" class="sidebar-search">
+        <div>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control search-menu"
+              placeholder="{{ menu?.placeholderSearch }}"
+            />
+            <span class="input-group-text">
+              <fa-icon [icon]="faSearch" aria-hidden="true"></fa-icon>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-menu">
+        <ul *ngIf="menu">
+          <li
+            *ngFor="let menu of menu.contentMenus"
+            [ngClass]="{
+              active: menu.active,
+              'sidebar-dropdown': menu.type === 'dropdown',
+              'header-menu': menu.type === 'header'
+            }"
+            role="button"
+          >
+            <span *ngIf="menu.type === 'header'">{{ menu.title }}</span>
+            <a *ngIf="menu.type !== 'header'" (click)="toggle(menu)">
+              <fa-icon
+                *ngIf="menu.icon"
+                [icon]="menu.icon"
+                style="background-color: transparent"
+              ></fa-icon>
+              <span>{{ menu.title }}</span>
+              <span
+                *ngIf="menu.badge"
+                class="badge badge-pill"
+                [ngClass]="menu.badge.class"
+              >
+                {{ menu.badge.text }}
+              </span>
+            </a>
+            <div
+              *ngIf="menu.type === 'dropdown'"
+              class="sidebar-submenu"
+              [@slide]="getState(menu)"
+            >
+              <ul *ngIf="menu.subMenus">
+                <li *ngFor="let submenu of menu.subMenus">
+                  <a
+                    role="button"
+                    (click)="navigationEmitted.emit(submenu.href)"
+                  >
+                    {{ submenu.title }}
+                    <span
+                      *ngIf="submenu.badge"
+                      class="badge badge-pill"
+                      [ngClass]="submenu.badge.class"
+                    >
+                      {{ submenu.badge.text }}
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </perfect-scrollbar>
+  </div>
+  <div class="sidebar-footer" *ngIf="menu">
+    <ng-container *ngFor="let footerMenu of menu.footerMenus">
+      <ng-container *ngIf="footerMenu.type === 'dropdown'">
+        <div class="dropdown" ngbDropdown container="body" placement="top-end">
+          <a
+            ngbDropdownToggle
+            (click)="navigationEmitted.emit(footerMenu.href)"
+            role="button"
+          >
+            <fa-icon *ngIf="footerMenu.icon" [icon]="footerMenu.icon"></fa-icon>
+            <span
+              *ngIf="footerMenu.badge"
+              class="badge badge-pill footer-action"
+              [ngClass]="footerMenu.badge.class"
+            >
+              {{ footerMenu.badge.text }}
+            </span>
+          </a>
+          <ul ngbDropdownMenu class="dropdown-menu dropdown-footer">
+            <li ngbDropdownItem class="p-0" [disabled]="true">
+              <a class="dropdown-item dropdown-header fs-5">
+                <fa-icon
+                  *ngIf="footerMenu.icon"
+                  [icon]="footerMenu.icon"
+                ></fa-icon>
+                {{ footerMenu.dropdownHeaderTitle }}
+              </a>
+            </li>
+            <ng-container *ngIf="footerMenu.dropdownItems">
+              <li
+                ngbDropdownItem
+                class="p-0"
+                *ngFor="let dropdownItem of footerMenu.dropdownItems"
+              >
+                <a
+                  class="dropdown-item"
+                  role="button"
+                  (click)="navigationEmitted.emit(footerMenu.href)"
+                >
+                  <div class="dropdown-content">
+                    <div class="d-flex">
+                      <fa-icon
+                        class="icon me-1"
+                        [icon]="dropdownItem.icon"
+                      ></fa-icon>
+                      <div class="dropdown-item-detail fs-5">
+                        {{ dropdownItem.text }}
+                      </div>
+                    </div>
+                    <div class="dropdown-item-subtitle fs-6">
+                      {{ dropdownItem.subtitle }}
+                    </div>
+                  </div>
+                </a>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="footerMenu.type === 'simple'">
+        <div>
+          <a role="button" (click)="navigationEmitted.emit(footerMenu.href)">
+            <fa-icon *ngIf="footerMenu.icon" [icon]="footerMenu.icon"></fa-icon>
+          </a>
+        </div>
+      </ng-container>
+    </ng-container>
+    <ng-container>
+      <div>
+        <a role="button" (click)="sidebarService.toggle()">
+          <fa-icon [icon]="faAnglesRight"></fa-icon>
+        </a>
+      </div>
+    </ng-container>
+  </div>
+</nav>

@@ -1,5 +1,12 @@
 /* eslint-disable */
-export default {
+const esModules = [
+  'winbox',
+  '@angular',
+  '@ngrx',
+  '@ng-bootstrap/ng-bootstrap',
+  '@fortawesome/angular-fontawesome',
+].join('|');
+module.exports = {
   displayName: 'winbox-example-app',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
@@ -10,10 +17,10 @@ export default {
     },
   },
   coverageDirectory: '../../coverage/apps/winbox-example-app',
+  transformIgnorePatterns: [`/node_modules/(?!${esModules}/)`],
   transform: {
-    '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
+    '^.+\\.(ts|js|mjs|html|svg)$': 'jest-preset-angular',
   },
-  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',

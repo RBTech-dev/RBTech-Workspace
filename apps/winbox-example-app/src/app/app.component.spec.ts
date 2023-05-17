@@ -1,13 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { NxWelcomeComponent } from './nx-welcome.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { SidebarComponent } from '@rbtechdev/angular-sidebar';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [AppComponent, NxWelcomeComponent],
+      imports: [RouterTestingModule, PerfectScrollbarModule, NgbModalModule],
+      declarations: [AppComponent, SidebarComponent],
     }).compileComponents();
   });
 
@@ -21,14 +23,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('winbox-example-app');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Welcome winbox-example-app'
-    );
   });
 });

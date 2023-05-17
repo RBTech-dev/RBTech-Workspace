@@ -17,7 +17,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@rbtech/angular-winbox": ["packages/angular-winbox/src/index.ts"]
+      "@rbtech/angular-winbox": ["packages/angular-winbox/src/index.ts"],
+      "@rbtechdev/angular-sidebar": ["packages/angular-sidebar/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

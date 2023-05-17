@@ -1,25 +1,20 @@
 /* eslint-disable */
-const esModules = ['winbox', '@angular', '@ngrx'].join('|');
+const esModules = ['@angular', '@ngrx'].join('|');
 const { getJestProjects } = require('@nrwl/jest');
 export default {
-  displayName: 'angular-winbox',
+  displayName: 'angular-sidebar',
   preset: '../../jest.preset.js',
   testMatch: ['**/+(*.)+(spec|test).+(ts|js)?(x)'],
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.spec.json',
-      stringifyContentPathRegex: '\\.(html|svg)$',
-    },
-  },
-  coverageDirectory: '../../coverage/packages/angular-winbox',
+  coverageDirectory: '../../coverage/packages/angular-sidebar',
   transform: {
     '^.+\\.(ts|js|mjs|html|svg)$': 'jest-preset-angular',
     [`(${esModules}).+\\.(js|jsx|mjs)$`]: 'babel-jest',
-    '^.+.(ts|js|html)$': 'ts-jest',
+    '^.+.(ts|js|html|svg)$': 'ts-jest',
   },
+  testEnvironment: 'jsdom',
   resolver: '@nrwl/jest/plugins/resolver',
-  transformIgnorePatterns: [`/node_modules/(?!${esModules}/)`],
+  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',
