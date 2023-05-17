@@ -1,20 +1,23 @@
 /* eslint-disable */
 const esModules = ['winbox', '@angular', '@ngrx'].join('|');
 const { getJestProjects } = require('@nrwl/jest');
-export default {
+module.exports = {
   displayName: 'angular-winbox',
   preset: '../../jest.preset.js',
-  testMatch: ['**/+(*.)+(spec|test).+(ts|js)?(x)'],
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../coverage/packages/angular-winbox',
+  globals: {
+    'ts-jest': {
+      tsconfig: '<rootDir>/tsconfig.spec.json',
+      stringifyContentPathRegex: '\\.(html|svg)$',
+    },
+  },
   transform: {
     '^.+\\.(ts|js|mjs|html|svg)$': 'jest-preset-angular',
-    [`(${esModules}).+\\.(js|jsx|mjs)$`]: 'babel-jest',
-    '^.+.(ts|js|html|svg)$': 'ts-jest',
   },
   testEnvironment: 'jsdom',
   resolver: '@nrwl/jest/plugins/resolver',
-  transformIgnorePatterns: [`/node_modules/(?!${esModules}/)`],
+  transformIgnorePatterns: [`../../node_modules/(?!${esModules}/)`],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',
