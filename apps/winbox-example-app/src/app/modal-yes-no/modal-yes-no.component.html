@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h4 [innerHTML]="title" class="modal-title" id="modal-title"></h4>
+  <button
+    (click)="cancel()"
+    aria-describedby="modal-title"
+    aria-label="Close button"
+    class="btn-close"
+    type="button"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <p [innerHTML]="message"></p>
+</div>
+
+<div class="modal-footer">
+  <button
+    (click)="cancel()"
+    [class]="ccsCancelClass"
+    class="btn cursor-pointer text-uppercase"
+    type="button"
+  >
+    {{ noLabel }}
+  </button>
+  <button
+    (click)="confirm()"
+    [class]="ccsConfirmClass"
+    class="btn cursor-pointer text-uppercase"
+    type="button"
+  >
+    {{ yesLabel }}
+  </button>
+</div>

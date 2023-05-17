@@ -2,6 +2,7 @@ import {
   ApplicationRef,
   ChangeDetectorRef,
   ComponentFactoryResolver,
+  ComponentRef,
   Injectable,
   Injector,
   Type,
@@ -56,11 +57,15 @@ export class WinboxService {
     // una funzione da invocare alla chiusura della winBox
     const optionsClose = options.onclose;
     winBox.onclose = (force) => {
-      this.winBoxStack = this.winBoxStack.filter((w) => w.id !== winBox.id);
-      this.isThereAWinBox = this.winBoxStack.length !== 0;
-      optionsClose?.apply(winBox, [force]);
-      componentRef.destroy();
-      return false;
+      if (force) {
+        return this.destroyComponent(componentRef, winBox);
+      }
+
+      const isCloseConfirmed = optionsClose?.apply(winBox, [force]);
+      if (isCloseConfirmed) {
+        return this.destroyComponent(componentRef, winBox);
+      }
+      return true;
     };
     this.isThereAWinBox = true;
     this.winBoxStack.push(winBox);
@@ -94,5 +99,15 @@ export class WinboxService {
   /** This method maximize a Winbox selected by id*/
   public maximizeWinbox(id: string | number, state: boolean) {
     this.winBoxStack.find((winbox) => winbox.id === id)?.maximize(state);
+  }
+
+  private destroyComponent(
+    componentRef: ComponentRef<any>,
+    winBox: WinBox
+  ): boolean {
+    componentRef.destroy();
+    this.winBoxStack = this.winBoxStack.filter((w) => w.id !== winBox.id);
+    this.isThereAWinBox = this.winBoxStack.length !== 0;
+    return false;
   }
 }
