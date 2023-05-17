@@ -86,7 +86,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/winbox-example-app"],
       "options": {
-        "jestConfig": "apps/winbox-example-app/jest.config.ts",
+        "jestConfig": "apps/winbox-example-app/jest.config.js",
         "passWithNoTests": true
       }
     }

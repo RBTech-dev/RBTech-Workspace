@@ -25,7 +25,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/packages/angular-winbox"],
       "options": {
-        "jestConfig": "packages/angular-winbox/jest.config.ts",
+        "jestConfig": "packages/angular-winbox/jest.config.js",
         "passWithNoTests": true
       }
     },
