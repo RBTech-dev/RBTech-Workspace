@@ -11,6 +11,7 @@ import { ComponentPortal, DomPortalOutlet } from '@angular/cdk/portal';
 import 'winbox';
 
 declare const WinBox: WinBox.WinBoxConstructor;
+
 export type WinBoxOptions = WinBox.Params;
 
 export interface WinBoxContainer<ComponentInstance> {
