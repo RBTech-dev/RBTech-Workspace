@@ -25,17 +25,14 @@ jobs:
           fetch-depth: 0
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
       # Make sure we have all branches
       - name: Fetch other branches
         run: git fetch --no-tags --prune --depth=5 origin master
-
-        # https://github.com/marketplace/actions/npm-install-cache
-      - uses: c-hive/gha-npm-cache@v1
-        if: ${{ !env.ACT }}
 
       - uses: nrwl/nx-set-shas@v3
         with:
