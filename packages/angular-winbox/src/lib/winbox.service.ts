@@ -59,12 +59,11 @@ export class WinboxService {
     const optionsClose = options.onclose;
     winBox.onclose = (force) => {
       if (force) {
-        return this.destroyComponent(componentRef, winBox);
+        return this.destroyComponent<ComponentInstance>(componentRef, winBox);
       }
-
       const isCloseConfirmed = optionsClose?.apply(winBox, [force]);
-      if (isCloseConfirmed) {
-        return this.destroyComponent(componentRef, winBox);
+      if (isCloseConfirmed || !optionsClose) {
+        return this.destroyComponent<ComponentInstance>(componentRef, winBox);
       }
       return true;
     };
@@ -80,7 +79,7 @@ export class WinboxService {
 
   public closeAllWinBoxes() {
     for (const winBox of this.winBoxStack) {
-      winBox.close();
+      winBox.close(true);
     }
     this.winBoxStack = [];
     this.isThereAWinBox = false;
@@ -102,8 +101,8 @@ export class WinboxService {
     this.winBoxStack.find((winbox) => winbox.id === id)?.maximize(state);
   }
 
-  private destroyComponent(
-    componentRef: ComponentRef<any>,
+  private destroyComponent<ComponentInstance>(
+    componentRef: ComponentRef<ComponentInstance>,
     winBox: WinBox
   ): boolean {
     componentRef.destroy();

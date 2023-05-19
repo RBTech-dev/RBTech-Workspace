@@ -1,2 +1,8 @@
 <rbtech-sidebar [menu]="menu"></rbtech-sidebar>
+<button
+  style="position: fixed; right: 0; top: 0"
+  (click)="winboxService.closeAllWinBoxes()"
+>
+  CHIUDI TUTTE LE SCHEDE
+</button>
 <router-outlet></router-outlet>
