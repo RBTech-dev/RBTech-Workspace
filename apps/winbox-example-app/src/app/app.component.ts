@@ -93,7 +93,7 @@ export class AppComponent implements OnInit {
   };
 
   constructor(
-    private winboxService: WinboxService,
+    protected winboxService: WinboxService,
     private modalService: NgbModal
   ) {}
 
