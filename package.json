@@ -84,7 +84,7 @@
     "commitizen": "^4.3.0",
     "cypress": "^12.2.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "~8.40.0",
+    "eslint": "~8.41.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-prettier": "^4.2.1",
