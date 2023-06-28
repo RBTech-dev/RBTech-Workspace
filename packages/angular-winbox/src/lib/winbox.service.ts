@@ -1,13 +1,11 @@
 import {
   ApplicationRef,
   ChangeDetectorRef,
-  ComponentFactoryResolver,
   ComponentRef,
+  createComponent,
   Injectable,
-  Injector,
   Type,
 } from '@angular/core';
-import { ComponentPortal, DomPortalOutlet } from '@angular/cdk/portal';
 import 'winbox';
 
 declare const WinBox: WinBox.WinBoxConstructor;
@@ -25,12 +23,7 @@ export class WinboxService {
   private winBoxStack: WinBox[] = [];
   public isThereAWinBox = false;
 
-  constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private injector: Injector,
-    private appRef: ApplicationRef
-  ) {}
-
+  constructor(private appRef: ApplicationRef) {}
   get numberOfWinBoxes(): number {
     return this.winBoxStack.length;
   }
@@ -41,18 +34,11 @@ export class WinboxService {
   ): WinBoxContainer<ComponentInstance> {
     const winBox = new WinBox(options);
 
-    const portalHost = new DomPortalOutlet(
-      winBox.body,
-      this.componentFactoryResolver,
-      this.appRef,
-      this.injector
-    );
-
-    // Locate the component factory for the HeaderComponent
-    const portal = new ComponentPortal(component);
-
-    // Attach portal to host
-    const componentRef = portalHost.attach(portal);
+    const componentRef = createComponent(component, {
+      environmentInjector: this.appRef.injector,
+      hostElement: winBox.body,
+    });
+    this.appRef.attachView(componentRef.hostView);
 
     // estensione del metodo per permettere all'utente di passare
     // una funzione da invocare alla chiusura della winBox
