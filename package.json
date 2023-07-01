@@ -75,7 +75,7 @@
     "@nrwl/workspace": "16.4.1",
     "@schematics/angular": "~15.2.0",
     "@types/jest": "^29",
-    "@types/node": "18.16.18",
+    "@types/node": "18.16.19",
     "@types/winbox": "^0.2.1",
     "@typescript-eslint/eslint-plugin": "5.60.1",
     "@typescript-eslint/parser": "5.60.1",
