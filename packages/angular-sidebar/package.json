@@ -8,7 +8,7 @@
     "@fortawesome/fontawesome-svg-core": "^6",
     "@fortawesome/free-regular-svg-icons": "^6",
     "@fortawesome/free-solid-svg-icons": "^6",
-    "@ng-bootstrap/ng-bootstrap": "^14",
+    "@ng-bootstrap/ng-bootstrap": "^14 || ^15.0.0",
     "@popperjs/core": "^2",
     "bootstrap": "^5",
     "ngx-perfect-scrollbar": "^10"
