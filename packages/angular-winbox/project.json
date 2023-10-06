@@ -9,8 +9,7 @@
       "executor": "@nrwl/angular:package",
       "outputs": ["{workspaceRoot}/dist/packages/angular-winbox"],
       "options": {
-        "project": "packages/angular-winbox/ng-package.json",
-        "updateBuildableProjectDepsInPackageJson": true
+        "project": "packages/angular-winbox/ng-package.json"
       },
       "configurations": {
         "production": {
