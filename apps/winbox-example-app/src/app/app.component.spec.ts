@@ -1,15 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { SidebarComponent } from '@rbtechdev/angular-sidebar';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, PerfectScrollbarModule, NgbModalModule],
-      declarations: [AppComponent, SidebarComponent],
+      imports: [RouterTestingModule, NgbModalModule],
+      declarations: [AppComponent],
     }).compileComponents();
   });
 
