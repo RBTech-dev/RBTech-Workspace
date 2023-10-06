@@ -41,6 +41,9 @@ jobs:
           echo $VERSION
 
       # Run Install
+      - name: Sync package-lock.json
+        run: npm install --package-lock-only
+        
       - name: Install environment
         run: npm ci
 
