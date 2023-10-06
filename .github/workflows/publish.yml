@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         # Latest nodes only
-        node-version: [ 16.x ]
+        node-version: [ 16.16 ]
     steps:
       # Checkout code
       - name: Checkout Code
