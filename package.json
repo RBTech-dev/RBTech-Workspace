@@ -97,7 +97,7 @@
     "jest-environment-jsdom": "^29",
     "jest-preset-angular": "~13.1.0",
     "jest-raw-loader": "^1.0.1",
-    "lint-staged": "^13.1.2",
+    "lint-staged": "^14.0.0",
     "ng-packagr": "~16",
     "nx": "16.10.0",
     "postcss": "^8.4.16",
