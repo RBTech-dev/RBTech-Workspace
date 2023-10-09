@@ -34,7 +34,7 @@ jobs:
       - name: Fetch other branches
         run: git fetch --no-tags --prune --depth=5 origin master
 
-      - uses: nrwl/nx-set-shas@v3
+      - uses: nrwl/nx-set-shas@v4
         with:
           main-branch-name: 'master'
 
