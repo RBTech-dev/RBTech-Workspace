@@ -30,7 +30,7 @@ export class WinboxService {
 
   openWinBox<ComponentInstance>(
     options: WinBoxOptions,
-    component: Type<ComponentInstance>
+    component: Type<ComponentInstance>,
   ): WinBoxContainer<ComponentInstance> {
     const winBox = new WinBox(options);
 
@@ -82,14 +82,23 @@ export class WinboxService {
     this.winBoxStack.find((winbox) => winbox.id === id)?.minimize(state);
   }
 
-  /** This method maximize a Winbox selected by id*/
+  /**
+   * This method maximizes or restores a Winbox identified by its id.
+   *
+   * @param id - The id of the Winbox to be maximized or restored. It can be either a string or a number.
+   * @param state - A boolean value indicating whether to maximize or restore the Winbox.
+   *   - If `true`, the Winbox will be maximized.
+   *   - If `false`, the Winbox will be restored to its previous state.
+   *
+   * @returns {void} This method does not return any value.
+   */
   public maximizeWinbox(id: string | number, state: boolean) {
     this.winBoxStack.find((winbox) => winbox.id === id)?.maximize(state);
   }
 
   private destroyComponent<ComponentInstance>(
     componentRef: ComponentRef<ComponentInstance>,
-    winBox: WinBox
+    winBox: WinBox,
   ): boolean {
     componentRef.destroy();
     this.winBoxStack = this.winBoxStack.filter((w) => w.id !== winBox.id);

@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/winbox-example-app/src",
   "prefix": "rbtech",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -59,10 +60,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "winbox-example-app:build:production"
+          "buildTarget": "winbox-example-app:build:production"
         },
         "development": {
-          "browserTarget": "winbox-example-app:build:development"
+          "buildTarget": "winbox-example-app:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -70,7 +71,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "winbox-example-app:build"
+        "buildTarget": "winbox-example-app:build"
       }
     },
     "lint": {
@@ -90,6 +91,5 @@
         "passWithNoTests": true
       }
     }
-  },
-  "tags": []
+  }
 }

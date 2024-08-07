@@ -1,8 +1,5 @@
 {
   "npmScope": "rbtech",
-  "affected": {
-    "defaultBase": "master"
-  },
   "cli": {
     "packageManager": "npm"
   },
@@ -62,5 +59,7 @@
       "!{projectRoot}/jest.config.[jt]s",
       "!{projectRoot}/src/test-setup.[jt]s"
     ]
-  }
+  },
+  "useInferencePlugins": false,
+  "defaultBase": "master"
 }

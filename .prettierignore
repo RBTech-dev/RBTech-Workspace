@@ -12,3 +12,5 @@
 /.vscode
 
 package-lock.json
+
+/.nx/workspace-data
