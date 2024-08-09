@@ -1,6 +1,6 @@
 /* eslint-disable */
 const esModules = ['winbox', '@angular', '@ngrx'].join('|');
-const { getJestProjects } = require('@nrwl/jest');
+const { getJestProjects } = require('@nx/jest');
 module.exports = {
   displayName: 'angular-winbox',
   preset: '../../jest.preset.js',
@@ -16,7 +16,7 @@ module.exports = {
     '^.+\\.(ts|js|mjs|html|svg)$': 'jest-preset-angular',
   },
   testEnvironment: 'jsdom',
-  resolver: '@nrwl/jest/plugins/resolver',
+  resolver: '@nx/jest/plugins/resolver',
   transformIgnorePatterns: [`../../node_modules/(?!${esModules}/)`],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
