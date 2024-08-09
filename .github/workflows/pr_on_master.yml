@@ -41,7 +41,7 @@ jobs:
       - name: Install environment
         run: npm ci --include=dev
 
-      - run: npx nx workspace-lint
+      - run: npx nx lint
       - run: npx nx format:write --base="origin/master" --code-coverage --verbose
       - run: npx nx format:check --base="origin/master" --code-coverage --verbose
       - run: npx nx affected --target=lint --parallel=3

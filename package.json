@@ -18,7 +18,7 @@
     "format:check": "nx format:check --verbose",
     "update": "ng update @nx/workspace",
     "update:check": "ng update",
-    "lint": "nx workspace-lint && ng lint",
+    "lint": "nx workspace lint && ng lint",
     "dep-graph": "nx dep-graph",
     "workspace-schematic": "nx workspace-schematic",
     "help": "nx help",
