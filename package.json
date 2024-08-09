@@ -134,5 +134,10 @@
   "engines": {
     "node": ">= 14",
     "npm": ">= 7"
+  },
+  "overrides": {
+    "ng-packagr": {
+      "esbuild": "0.21.5"
+    }
   }
 }
