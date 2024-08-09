@@ -24,7 +24,8 @@
             "prefix": "rbtech",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@nx/dependency-checks": "error"
       }
     },
     {

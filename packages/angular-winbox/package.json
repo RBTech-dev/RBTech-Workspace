@@ -2,8 +2,8 @@
   "name": "@rbtechdev/angular-winbox",
   "version": "1.1.24",
   "peerDependencies": {
-    "@angular/common": "^9 || ^10 || ^11 || ^12 || ^13 || ^14 || ^15 || ^ 16",
-    "@angular/core": "^9 || ^10 || ^11 || ^12 || ^13 || ^14 || ^15 || ^ 16",
+    "@angular/common": "^ 16 || ^17 || ^18",
+    "@angular/core": "^ 16 || ^17 || ^18",
     "@types/winbox": "^0.2.1",
     "winbox": "^0"
   },
