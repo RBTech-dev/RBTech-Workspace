@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { WinboxService } from '@rbtech/angular-winbox';
-import { SimpleComponentComponent } from './simple-component/simple-component.component';
-import { ModalYesNoComponent } from './modal-yes-no/modal-yes-no.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { WinboxService } from '@rbtech/angular-winbox';
+import { ModalYesNoComponent } from './modal-yes-no/modal-yes-no.component';
+import { SimpleComponentComponent } from './simple-component/simple-component.component';
 
 @Component({
   selector: 'rbtech-root',
@@ -14,14 +14,18 @@ export class AppComponent implements OnInit {
 
   constructor(
     protected winboxService: WinboxService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
   ) {}
 
   ngOnInit(): void {
+    this.createNewWinBox();
+  }
+
+  public createNewWinBox(): void {
     const winboxInstance =
       this.winboxService.openWinBox<SimpleComponentComponent>(
         {
-          title: 'Test',
+          title: 'A Random Pokémon',
           height: '90%',
           width: '40%',
           x: 'center',
@@ -29,8 +33,9 @@ export class AppComponent implements OnInit {
           index: 1057,
           onclose: (): boolean => {
             const modal = this.modalService.open(ModalYesNoComponent);
-            modal.componentInstance.title = 'Titolo';
-            modal.componentInstance.message = 'Vuoi chiudere winbox?';
+            modal.componentInstance.title = 'Are you sure?';
+            modal.componentInstance.message =
+              'Wanna close the selected winbox?';
             winboxInstance.winBox.minimize(true);
 
             modal.result
@@ -41,7 +46,7 @@ export class AppComponent implements OnInit {
             return false;
           },
         },
-        SimpleComponentComponent
+        SimpleComponentComponent,
       );
     this.winboxService.showLastWinbox();
   }

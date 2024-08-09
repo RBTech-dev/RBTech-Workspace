@@ -3,7 +3,7 @@
 A wrapper component for [WinBox.js](https://nextapps-de.github.io/winbox/) with the ability to mount Angular components.
 
 ## Installation
-```bash
+```npm instal @rbtechdev/angular-winbox
 //
 ```
 ## Usage
