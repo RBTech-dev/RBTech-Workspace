@@ -1,6 +1,6 @@
-import { formatFiles, installPackagesTask, Tree } from '@nrwl/devkit';
-import { wrapAngularDevkitSchematic } from '@nrwl/devkit/ngcli-adapter';
-import { libraryGenerator } from '@nrwl/workspace/generators';
+import { formatFiles, installPackagesTask, Tree } from '@nx/devkit';
+import { wrapAngularDevkitSchematic } from '@nx/devkit/ngcli-adapter';
+import { libraryGenerator } from '@nx/workspace/generators';
 import { TaggedLibrarySchemaOptions } from './schema';
 
 function getTags(schema: TaggedLibrarySchemaOptions): string {
@@ -10,7 +10,7 @@ function getTags(schema: TaggedLibrarySchemaOptions): string {
 function getLibraryGenerator(schema: TaggedLibrarySchemaOptions) {
   switch (schema.platform) {
     case 'angular':
-      return wrapAngularDevkitSchematic('@nrwl/angular', 'library');
+      return wrapAngularDevkitSchematic('@nx/angular', 'library');
   }
 
   return libraryGenerator;

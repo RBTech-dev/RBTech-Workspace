@@ -10,7 +10,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class ModalYesNoComponent {
   @Input() title!: string;
   @Input() message!: string;
-  @Input() yesLabel = 'Sì';
+  @Input() yesLabel = 'Yes';
   @Input() noLabel = 'No';
   @Input() ccsCancelClass = 'btn-secondary';
   @Input() ccsConfirmClass = 'btn-primary';

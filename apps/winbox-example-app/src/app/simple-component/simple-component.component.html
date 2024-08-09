@@ -1,1 +1,7 @@
-<p>simple-component works!</p>
+<p class="fw-bold text-uppercase text-center mt-2 fs-2">
+  {{ randomPokemon()?.name }} #{{ randomPokemon()?.id }}
+</p>
+<img
+  class="img-fluid"
+  [src]="randomPokemon()?.sprites?.other?.home?.front_default"
+/>

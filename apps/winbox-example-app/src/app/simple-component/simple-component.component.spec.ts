@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { provideHttpClient } from '@angular/common/http';
 import { SimpleComponentComponent } from './simple-component.component';
 
 describe('SimpleComponentComponent', () => {
@@ -9,6 +10,7 @@ describe('SimpleComponentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SimpleComponentComponent],
+      providers: [provideHttpClient()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SimpleComponentComponent);

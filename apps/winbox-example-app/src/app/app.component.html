@@ -1,7 +1,10 @@
-<button
-  style="position: fixed; right: 0; top: 0"
-  (click)="winboxService.closeAllWinBoxes()"
->
-  CHIUDI TUTTE LE SCHEDE
-</button>
+<div class="d-flex flex-column align-items-start vh-100 p-5 gap-3">
+  <button class="btn btn-primary" (click)="createNewWinBox()">
+    Add a new Winbox
+  </button>
+  <button class="btn btn-primary" (click)="winboxService.closeAllWinBoxes()">
+    Close all Winboxes
+  </button>
+</div>
+
 <router-outlet></router-outlet>
