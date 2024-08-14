@@ -84,7 +84,7 @@
     "babel-jest": "^29",
     "babel-preset-env": "^1.7.0",
     "commitizen": "^4.3.0",
-    "cypress": "13.13.2",
+    "cypress": "13.13.3",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "8.57.0",
     "eslint-config-prettier": "^9",
