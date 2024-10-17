@@ -76,7 +76,7 @@
     "@nx/workspace": "20.0.1",
     "@schematics/angular": "18.2.9",
     "@types/jest": "^29",
-    "@types/node": "20.16.11",
+    "@types/node": "20.16.12",
     "@types/winbox": "^0.2.5",
     "@typescript-eslint/eslint-plugin": "8.9.0",
     "@typescript-eslint/parser": "8.9.0",
