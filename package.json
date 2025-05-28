@@ -41,7 +41,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
-    "@ng-bootstrap/ng-bootstrap": "^17.0.0",
+    "@ng-bootstrap/ng-bootstrap": "^18.0.0",
     "@nx/angular": "20.3.1",
     "@popperjs/core": "^2.11.8",
     "@swc-node/register": "^1.10.9",
