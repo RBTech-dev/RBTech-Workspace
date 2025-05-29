@@ -3,27 +3,29 @@ import {
   ChangeDetectorRef,
   ComponentRef,
   createComponent,
+  inject,
   Injectable,
   Type,
 } from '@angular/core';
 import 'winbox';
 
-declare const WinBox: WinBox.WinBoxConstructor;
+import type { WinBoxConstructor, Params, default as WinBoxType } from 'winbox';
 
-export type WinBoxOptions = WinBox.Params;
+declare const WinBox: WinBoxConstructor;
+export type WinBoxOptions = Params;
 
 export interface WinBoxContainer<ComponentInstance> {
-  winBox: WinBox;
+  winBox: WinBoxType;
   instance: ComponentInstance;
   changeDetectorRef?: ChangeDetectorRef;
 }
 
 @Injectable({ providedIn: 'root' })
 export class WinboxService {
-  private winBoxStack: WinBox[] = [];
+  private appRef = inject(ApplicationRef);
+  private winBoxStack: WinBoxType[] = [];
   public isThereAWinBox = false;
 
-  constructor(private appRef: ApplicationRef) {}
   get numberOfWinBoxes(): number {
     return this.winBoxStack.length;
   }
@@ -145,7 +147,7 @@ export class WinboxService {
    */
   private destroyComponent<ComponentInstance>(
     componentRef: ComponentRef<ComponentInstance>,
-    winBox: WinBox,
+    winBox: WinBoxType,
   ): boolean {
     componentRef.destroy();
     this.winBoxStack = this.winBoxStack.filter((w) => w.id !== winBox.id);
