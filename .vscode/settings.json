@@ -1,7 +1,9 @@
 {
     "cSpell.words": [
+        "fontawesome",
         "Pokedex",
         "rbtechdev",
         "Winboxes"
-    ]
+    ],
+    "nxConsole.generateAiAgentRules": true
 }

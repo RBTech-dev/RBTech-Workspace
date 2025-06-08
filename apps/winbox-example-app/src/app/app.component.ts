@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { WinboxService } from '@rbtech/angular-winbox';
 import { ModalYesNoComponent } from './modal-yes-no/modal-yes-no.component';
@@ -11,11 +11,8 @@ import { SimpleComponentComponent } from './simple-component/simple-component.co
 })
 export class AppComponent implements OnInit {
   title = 'winbox-example-app';
-
-  constructor(
-    protected winboxService: WinboxService,
-    private modalService: NgbModal,
-  ) {}
+  private readonly winboxService = inject(WinboxService);
+  private readonly modalService = inject(NgbModal);
 
   ngOnInit(): void {
     this.createNewWinBox();

@@ -1,27 +1,22 @@
-# File for Pull Request on master branch
 name: PR on master
 
-# When a PR is opened to master
 on:
   pull_request:
-    branches:
-      - master
+    branches: [master]
     types: [opened, reopened, synchronize]
 
 jobs:
   build:
-    # Setup OS and Node Version
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        # Latest nodes only
         node-version: [18.x]
-        # Define Steps
+
     steps:
-      # Checkout code
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
 
       - name: Use Node.js ${{ matrix.node-version }}
@@ -30,20 +25,22 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      # Make sure we have all branches
-      - name: Fetch other branches
-        run: git fetch --no-tags --prune --depth=5 origin master
-
-      - uses: nrwl/nx-set-shas@v4
+      - name: Set NX SHAs
+        uses: nrwl/nx-set-shas@v4
         with:
           main-branch-name: 'master'
 
-      - name: Install environment
-        run: npm ci --include=dev
+      - name: Install dependencies
+        run: npm ci
 
-      - run: npx nx lint
-      - run: npx nx format:write --base="origin/master" --code-coverage --verbose
-      - run: npx nx format:check --base="origin/master" --code-coverage --verbose
-      - run: npx nx affected --target=lint --parallel=3
-      - run: npx nx affected --target=test --parallel=3 --ci --code-coverage --verbose
-      - run: npx nx affected --target=build --parallel=3
+      - name: Lint affected projects
+        run: npx nx affected --target=lint --parallel=3
+
+      - name: Check formatting
+        run: npx nx format:check --base=origin/master --verbose
+
+      - name: Test affected projects
+        run: npx nx affected --target=test --parallel=3 --ci --code-coverage --verbose
+
+      - name: Build affected projects
+        run: npx nx affected --target=build --parallel=3

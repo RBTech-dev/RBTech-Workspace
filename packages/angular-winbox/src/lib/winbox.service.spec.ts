@@ -1,19 +1,39 @@
 import { TestBed } from '@angular/core/testing';
 import { WinboxService } from './winbox.service';
 import { Component } from '@angular/core';
-import WinBox from 'winbox';
-export type WinBoxOptions = WinBox.Params;
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+
+const winBoxMockInstance = {
+  show: jest.fn(),
+  hide: jest.fn(),
+  close: jest.fn(),
+  focus: jest.fn(),
+  setTitle: jest.fn(),
+  onclose: null as (() => void) | null,
+};
+
+winBoxMockInstance.close.mockImplementation(() => {
+  if (winBoxMockInstance.onclose) {
+    winBoxMockInstance.onclose();
+  }
+});
+
+const WinBoxMock = jest.fn().mockImplementation(() => winBoxMockInstance);
 
 @Component({ selector: 'rbtech-app-welcome', template: '' })
 class SimpleComponent {}
 
-describe('WinBoxServiceService', () => {
+describe('WinboxService', () => {
   let service: WinboxService;
+
   beforeEach(() => {
+    (globalThis as any).WinBox = WinBoxMock;
+
     TestBed.configureTestingModule({
       declarations: [SimpleComponent],
-      providers: [{ provide: WinBox, useValue: WinBox }],
+      providers: [WinboxService],
     });
+
     service = TestBed.inject(WinboxService);
   });
 
@@ -21,24 +41,24 @@ describe('WinBoxServiceService', () => {
     expect(service).toBeTruthy();
   });
 
-  /*test('isThereAWinBox should be equal to true', () => {
+  it('isThereAWinBox should be equal to true', () => {
     service.openWinBox({}, SimpleComponent);
     expect(service.isThereAWinBox).toBe(true);
   });
 
-  test('isThereAWinBox should be equal to false', () => {
+  it('isThereAWinBox should be equal to false', () => {
     service.openWinBox({}, SimpleComponent);
     service.closeAllWinBoxes();
     expect(service.isThereAWinBox).toBe(false);
   });
 
-  test('number of Winbox instances should be greater than 0', () => {
+  it('number of Winbox instances should be greater than 0', () => {
     service.openWinBox({}, SimpleComponent);
     expect(service.numberOfWinBoxes).toBeGreaterThan(0);
     expect(service.numberOfWinBoxes).toBe(1);
   });
 
-  test('last winbox should be shown', () => {
+  it('last winbox should be shown', () => {
     service.openWinBox({}, SimpleComponent);
     const secondWinBox = service.openWinBox({}, SimpleComponent);
     if (secondWinBox) {
@@ -48,11 +68,10 @@ describe('WinBoxServiceService', () => {
     }
   });
 
-  test('number of opened winbox should be decreased', () => {
+  it('number of opened winbox should be decreased', () => {
     const winBoxWrapper = service.openWinBox({}, SimpleComponent);
     expect(service.numberOfWinBoxes).toBe(1);
-    if (winBoxWrapper)
-      winBoxWrapper.winBox.close();
+    if (winBoxWrapper) winBoxWrapper.winBox.close();
     expect(service.numberOfWinBoxes).toBe(0);
-  });*/
+  });
 });

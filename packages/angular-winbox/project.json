@@ -30,8 +30,9 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
+        "exclude": ["**/*.spec.ts"],
         "lintFilePatterns": [
           "packages/angular-winbox/src/**/*.ts",
           "packages/angular-winbox/src/**/*.html"
