@@ -1,3 +1,4 @@
+import path from 'path';
 import baseConfig from '../../eslint.config.mjs';
 import angularTemplatePlugin from '@angular-eslint/eslint-plugin-template';
 import nxPlugin from '@nx/eslint-plugin';
@@ -17,7 +18,7 @@ export default [
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        project: ['./tsconfig.eslint.json'],
+        project: [path.resolve(import.meta.dirname, './tsconfig.eslint.json')],
         tsconfigRootDir: import.meta.dirname,
       },
     },

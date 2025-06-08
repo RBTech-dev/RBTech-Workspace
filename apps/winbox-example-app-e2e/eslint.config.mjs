@@ -1,3 +1,4 @@
+import path from 'path';
 import baseConfig from '../../eslint.config.mjs';
 import cypress from 'eslint-plugin-cypress/flat';
 import tsParser from '@typescript-eslint/parser';
@@ -23,7 +24,7 @@ export default [
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        project: ['./tsconfig.eslint.json'],
+         project: [path.resolve(import.meta.dirname, './tsconfig.eslint.json')],
         tsconfigRootDir: import.meta.dirname
       },
     },
