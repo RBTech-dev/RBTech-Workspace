@@ -1,28 +1,36 @@
 import baseConfig from '../../eslint.config.mjs';
-import cypressPlugin from 'eslint-plugin-cypress';
+import cypress from 'eslint-plugin-cypress/flat';
+import tsParser from '@typescript-eslint/parser';
 
 export default [
-  // Include la config base
+  cypress.configs['recommended'],
   ...baseConfig,
 
   // Ignora niente (opzionale)
   {
-    ignores: ['!**/*'],
+    ignores: ['!**/*', '**/commands.ts'],
   },
 
-  // Override per file TS/JS
+  // Override per file Cypress (E2E)
   {
-    files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
-    plugins: {
-      cypress: cypressPlugin,
+    files: [
+      '**/*.cy.ts',
+      '**/*.cy.js',
+      'cypress/**/*.ts',
+      'cypress/**/*.js',
+      'apps/**/*-e2e/**/*.ts'
+    ],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: ['./tsconfig.eslint.json'],
+        tsconfigRootDir: import.meta.dirname
+      },
     },
     rules: {
-      // Se vuoi, puoi aggiungere qui regole da "plugin:cypress/recommended"
-      // Ad esempio (un paio tra quelli comuni):
       'cypress/no-assigning-return-values': 'error',
       'cypress/no-unnecessary-waiting': 'warn',
       'cypress/assertion-before-screenshot': 'warn',
-      // ... aggiungi altre regole qui se vuoi
     },
-  },
+  }
 ];

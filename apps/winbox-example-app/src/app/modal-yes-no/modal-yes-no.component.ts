@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -15,13 +15,13 @@ export class ModalYesNoComponent {
   @Input() ccsCancelClass = 'btn-secondary';
   @Input() ccsConfirmClass = 'btn-primary';
 
-  constructor(public modal: NgbActiveModal) {}
+  private readonly modalService = inject(NgbActiveModal);
 
   cancel() {
-    this.modal.dismiss();
+    this.modalService.dismiss();
   }
 
   confirm() {
-    this.modal.close();
+    this.modalService.close();
   }
 }

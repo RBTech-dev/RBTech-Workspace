@@ -9,7 +9,7 @@ import { Pokemon } from '../models/pokemon.model';
   styleUrls: ['./simple-component.component.scss'],
 })
 export class SimpleComponentComponent {
-  private httpClient = inject(HttpClient);
+  private readonly httpClient = inject(HttpClient);
 
   public randomPokedexNumber = this.getRandomNumber(1, 1025);
   public randomPokemon = toSignal(

@@ -1,25 +1,25 @@
 import baseConfig from '../../eslint.config.mjs';
-import angularPlugin from '@angular-eslint/eslint-plugin';
 import angularTemplatePlugin from '@angular-eslint/eslint-plugin-template';
 import nxPlugin from '@nx/eslint-plugin';
-import tsParser from "@typescript-eslint/parser";
-import angularEslint from "@angular-eslint/eslint-plugin";
+import cypress from 'eslint-plugin-cypress/flat';
+import tsParser from '@typescript-eslint/parser';
 
 export default [
-  // Include la config base flat importata
+  cypress.configs['recommended'],
   ...baseConfig,
-
-  // Ignora niente (opzionale, se serve)
+  ...nxPlugin.configs['flat/angular'],
+  ...nxPlugin.configs['flat/angular-template'],
   {
     ignores: ['!**/*'],
   },
-
-  // Override per file TS
   {
-    files: ['*.ts'],
-    plugins: {
-      '@nx': nxPlugin,
-      '@angular-eslint': angularPlugin,
+    files: ['**/*.ts'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: ['./tsconfig.eslint.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
     rules: {
       '@angular-eslint/directive-selector': [
@@ -43,11 +43,11 @@ export default [
 
   // Override per file HTML
   {
-    files: ['*.html'],
+    files: ['**/*.html'],
     plugins: {
       '@nx': nxPlugin,
       '@angular-eslint-template': angularTemplatePlugin,
     },
     rules: {},
-  }
+  },
 ];

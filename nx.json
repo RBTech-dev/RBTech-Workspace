@@ -24,6 +24,15 @@
   "defaultProject": "angular-winbox",
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
+    "@nx/eslint:lint": {
+      "cache": true,
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore",
+        "{workspaceRoot}/eslint.config.mjs"
+      ]
+    },
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"],

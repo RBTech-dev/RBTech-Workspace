@@ -5,6 +5,9 @@ import nxEslint from '@nx/eslint-plugin';
 
 export default [
   ...baseConfig,
+
+  ...nxEslint.configs['flat/angular'],
+  ...nxEslint.configs['flat/angular-template'],
   {
     files: ['*.ts'],
     ignores: ['**/winbox.service.spec.ts'],
